@@ -32,12 +32,12 @@
     "LOADING_CONVERSATIONS": "Cargando conversaciones",
     "CANNOT_REPLY": "No puede responder debido a",
     "24_HOURS_WINDOW": "Restricción de la ventana de mensajes de 24 horas",
-    "API_HOURS_WINDOW": "Solo puedes responder a esta conversación dentro de {hours} horas",
+    "API_HOURS_WINDOW": "You can only reply to this conversation within {hours} hours",
     "NOT_ASSIGNED_TO_YOU": "Esta conversación no te está asignada. ¿Quieres asignarla a ti mismo?",
     "ASSIGN_TO_ME": "Asignar a mi",
     "TWILIO_WHATSAPP_CAN_REPLY": "Sólo puede responder a esta conversación usando una plantilla de mensaje debido a",
     "TWILIO_WHATSAPP_24_HOURS_WINDOW": "Restricción de la ventana de mensajes de 24 horas",
-    "OLD_INSTAGRAM_INBOX_REPLY_BANNER": "Esta cuenta de Instagram fue migrada a la nueva bandeja de entrada del canal Instagram. Todos los nuevos mensajes aparecerán allí. Ya no podrás enviar mensajes de esta conversación.",
+    "OLD_INSTAGRAM_INBOX_REPLY_BANNER": "This Instagram account was migrated to the new Instagram channel inbox. All new messages will show up there. You won’t be able to send messages from this conversation anymore.",
     "REPLYING_TO": "Esta respondiendo a:",
     "REMOVE_SELECTION": "Eliminar selección",
     "DOWNLOAD": "Descargar",
@@ -70,7 +70,6 @@
       "RESOLVE_ACTION": "Resolver",
       "REOPEN_ACTION": "Reabrir",
       "OPEN_ACTION": "Abrir",
-      "MORE_ACTIONS": "Otras acciones",
       "OPEN": "Más",
       "CLOSE": "Cerrar",
       "DETAILS": "detalles",
@@ -96,10 +95,6 @@
         "NEXT_WEEK": "Próxima semana"
       }
     },
-    "MENTION": {
-      "AGENTS": "Agentes",
-      "TEAMS": "Equipos"
-    },
     "CUSTOM_SNOOZE": {
       "TITLE": "Posponer hasta",
       "APPLY": "Posponer",
@@ -122,11 +117,6 @@
         "FAILED": "No se pudo cambiar la prioridad. Por favor, inténtelo de nuevo."
       }
     },
-    "DELETE_CONVERSATION": {
-      "TITLE": "Eliminar conversación #{conversationId}",
-      "DESCRIPTION": "¿Está seguro que desea eliminar esta conversación?",
-      "CONFIRM": "Eliminar"
-    },
     "CARD_CONTEXT_MENU": {
       "PENDING": "Marcar como pendiente",
       "RESOLVED": "Marcar como resuelto",
@@ -143,7 +133,6 @@
       "ASSIGN_LABEL": "Asignar etiqueta",
       "AGENTS_LOADING": "Cargando agentes...",
       "ASSIGN_TEAM": "Asignar equipo",
-      "DELETE": "Eliminar conversación",
       "API": {
         "AGENT_ASSIGNMENT": {
           "SUCCESFUL": "ID de conversación {conversationId} asignado a \"{agentName}\"",
@@ -218,8 +207,6 @@
     "ASSIGN_LABEL_SUCCESFUL": "Etiqueta asignada correctamente",
     "ASSIGN_LABEL_FAILED": "No se ha podido asignar la etiqueta",
     "CHANGE_TEAM": "Equipo de conversación cambiado",
-    "SUCCESS_DELETE_CONVERSATION": "Conversación eliminada con éxito",
-    "FAIL_DELETE_CONVERSATION": "¡No se pudo eliminar la conversación! Inténtalo de nuevo",
     "FILE_SIZE_LIMIT": "El archivo supera el límite de archivos adjuntos de {MAXIMUM_SUPPORTED_FILE_UPLOAD_SIZE} MB",
     "MESSAGE_ERROR": "No se puede enviar este mensaje, por favor inténtalo de nuevo más tarde",
     "SENT_BY": "Enviado por:",
@@ -268,6 +255,16 @@
       }
     }
   },
+  "FORWARD_MODAL": {
+    "TITLE": "Compartir mensaje",
+    "DESC": "Comparte este mensaje con tus contactos",
+    "SEARCH_LABEL": "Buscar un contacto",
+    "SEARCH_PLACEHOLDER": "Buscar por nombre o teléfono",
+    "CONTACT": "Contacto",
+    "PHONE": "Teléfono",
+    "SUBMIT": "Reenviar",
+    "PROCESSING": "Reenviando mensaje..."
+  },
   "ONBOARDING": {
     "TITLE": "Hola 👋, ¡Bienvenido a {installationName}!",
     "DESCRIPTION": "Gracias por registrarse. Queremos que saque el máximo provecho de {installationName}. Aquí hay algunas cosas que puede hacer en {installationName} para hacer que la experiencia sea agradable.",
@@ -308,11 +305,10 @@
       "CONVERSATION_ACTIONS": "Acciones de conversación",
       "CONVERSATION_LABELS": "Etiquetas de conversación",
       "CONVERSATION_INFO": "Información de la conversación",
-      "CONTACT_NOTES": "Notas de contacto",
+      "CONTACT_NOTES": "Contact Notes",
       "CONTACT_ATTRIBUTES": "Atributos de contacto",
       "PREVIOUS_CONVERSATION": "Conversaciones anteriores",
       "MACROS": "Macros",
-      "LINEAR_ISSUES": "Problemas lineales vinculados",
       "SHOPIFY_ORDERS": "Shopify Orders"
     },
     "SHOPIFY": {

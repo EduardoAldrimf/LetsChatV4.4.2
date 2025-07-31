@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Keresés",
       "EMPTY_STATE": "Nincs találat"
-    },
-    "CLOSE": "Bezárás"
+    }
   }
 }

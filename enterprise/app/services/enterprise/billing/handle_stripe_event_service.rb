@@ -51,6 +51,7 @@ class Enterprise::Billing::HandleStripeEventService
 
   def update_account_attributes(subscription, plan)
     # https://stripe.com/docs/api/subscriptions/object
+
     account.update(
       custom_attributes: {
         stripe_customer_id: subscription.customer,

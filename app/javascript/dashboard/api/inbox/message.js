@@ -92,6 +92,15 @@ class MessageApi extends ApiClient {
     );
   }
 
+  forwardMessage(conversationId, messageId, contacts) {
+    return axios.post(
+      `${this.url}/${conversationId}/messages/${messageId}/forward`,
+      {
+        contacts,
+      }
+    );
+  }
+
   getPreviousMessages({ conversationId, after, before }) {
     const params = { before };
     if (after && Number(after) !== Number(before)) {

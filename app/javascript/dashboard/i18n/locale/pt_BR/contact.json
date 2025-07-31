@@ -285,7 +285,6 @@
     "HEADER": {
       "TITLE": "Contatos",
       "SEARCH_TITLE": "Pesquisar contatos",
-      "ACTIVE_TITLE": "Contatos ativos",
       "SEARCH_PLACEHOLDER": "Pesquisar...",
       "MESSAGE_BUTTON": "Enviar Mensagem",
       "SEND_MESSAGE": "Enviar mensagem",
@@ -458,10 +457,6 @@
             "PLACEHOLDER": "Adicionar Twitter"
           }
         }
-      },
-      "DELETE_CONTACT": {
-        "MESSAGE": "Esta ação é permanente e irreversível.",
-        "BUTTON": "Excluir agora"
       }
     },
     "DETAILS": {
@@ -471,7 +466,7 @@
       "DELETE_CONTACT": "Excluir contato",
       "DELETE_DIALOG": {
         "TITLE": "Confirmar exclusão",
-        "DESCRIPTION": "Tem certeza de que deseja excluir este contato?",
+        "DESCRIPTION": "Tem certeza de que deseja excluir este contato {contactName}?",
         "CONFIRM": "Sim, excluir",
         "API": {
           "SUCCESS_MESSAGE": "Contato excluído com sucesso",
@@ -560,8 +555,7 @@
       "SUBTITLE": "Comece a adicionar novos contatos clicando no botão abaixo",
       "BUTTON_LABEL": "Adicionar contato",
       "SEARCH_EMPTY_STATE_TITLE": "Nenhum contato corresponde à sua pesquisa 🔍",
-      "LIST_EMPTY_STATE_TITLE": "Não há contatos disponíveis nesta visualização 📋",
-      "ACTIVE_EMPTY_STATE_TITLE": "Nenhum contato está ativo no momento 🌙"
+      "LIST_EMPTY_STATE_TITLE": "Não há contatos disponíveis nesta visualização 📋"
     }
   },
   "COMPOSE_NEW_CONVERSATION": {

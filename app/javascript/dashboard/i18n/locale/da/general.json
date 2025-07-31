@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Søg",
       "EMPTY_STATE": "Ingen resultater fundet"
-    },
-    "CLOSE": "Luk"
+    }
   }
 }

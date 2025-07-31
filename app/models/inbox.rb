@@ -5,6 +5,7 @@
 # Table name: inboxes
 #
 #  id                            :integer          not null, primary key
+#  allow_agent_to_delete_message :boolean          default(TRUE), not null
 #  allow_messages_after_resolved :boolean          default(TRUE)
 #  auto_assignment_config        :jsonb
 #  business_name                 :string
@@ -14,6 +15,7 @@
 #  email_address                 :string
 #  enable_auto_assignment        :boolean          default(TRUE)
 #  enable_email_collect          :boolean          default(TRUE)
+#  external_token                :string           default(""), not null
 #  greeting_enabled              :boolean          default(FALSE)
 #  greeting_message              :string
 #  lock_to_single_conversation   :boolean          default(FALSE), not null
@@ -224,6 +226,13 @@ class Inbox < ApplicationRecord
 
   def check_channel_type?
     ['Channel::Email', 'Channel::Api', 'Channel::WebWidget'].include?(channel_type)
+  end
+
+  def configure_evolution_webhook
+    return unless channel.is_a?(Channel::Whatsapp)
+    return unless channel.provider == 'evolution'
+
+    channel.provider_service.configure_webhook if channel.provider_service.respond_to?(:configure_webhook)
   end
 end
 

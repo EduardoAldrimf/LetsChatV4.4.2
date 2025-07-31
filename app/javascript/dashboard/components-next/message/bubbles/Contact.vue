@@ -26,7 +26,19 @@ const phoneNumber = computed(() => {
 
 const contactName = computed(() => {
   const { meta } = attachment.value ?? {};
-  const { firstName, lastName } = meta ?? {};
+  if (!meta) return '';
+
+  const {
+    firstName,
+    lastName,
+    displayName,
+    display_name: displayNameUnderscore,
+  } = meta;
+
+  if (displayName || displayNameUnderscore) {
+    return displayName || displayNameUnderscore;
+  }
+
   return `${firstName ?? ''} ${lastName ?? ''}`.trim();
 });
 

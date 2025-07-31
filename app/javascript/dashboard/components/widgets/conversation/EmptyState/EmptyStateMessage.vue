@@ -1,5 +1,6 @@
 <script>
 import FeaturePlaceholder from './FeaturePlaceholder.vue';
+import { mapGetters } from 'vuex';
 export default {
   components: { FeaturePlaceholder },
   props: {
@@ -8,6 +9,9 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters({ globalConfig: 'globalConfig/get' }),
+  },
 };
 </script>
 
@@ -15,13 +19,13 @@ export default {
   <div class="flex flex-col items-center justify-center h-full">
     <img
       class="m-4 w-32 hidden dark:block"
-      src="dashboard/assets/images/no-chat-dark.svg"
-      alt="No Chat dark"
+      :src="globalConfig.logoThumbnail"
+      :alt="globalConfig.installationName"
     />
     <img
       class="m-4 w-32 block dark:hidden"
-      src="dashboard/assets/images/no-chat.svg"
-      alt="No Chat"
+      :src="globalConfig.logoThumbnail"
+      :alt="globalConfig.installationName"
     />
     <span class="text-sm text-n-slate-12 font-medium text-center">
       {{ message }}

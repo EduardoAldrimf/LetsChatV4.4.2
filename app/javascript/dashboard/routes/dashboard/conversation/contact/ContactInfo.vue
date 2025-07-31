@@ -1,5 +1,6 @@
 <script>
 import { mapGetters } from 'vuex';
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 import { useAlert } from 'dashboard/composables';
 import { dynamicTime } from 'shared/helpers/timeHelper';
 import { useAdmin } from 'dashboard/composables/useAdmin';
@@ -54,7 +55,11 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({ uiFlags: 'contacts/getUIFlags' }),
+    ...mapGetters({
+      uiFlags: 'contacts/getUIFlags',
+      accountId: 'getCurrentAccountId',
+      isFeatureEnabledonAccount: 'accounts/isFeatureEnabledonAccount',
+    }),
     contactProfileLink() {
       return `/app/accounts/${this.$route.params.accountId}/contacts/${this.contact.id}`;
     },
@@ -89,6 +94,39 @@ export default {
     // Delete Modal
     confirmDeleteMessage() {
       return ` ${this.contact.name}?`;
+    },
+    isWavoipFeatureEnabled() {
+      return this.isFeatureEnabledonAccount(
+        this.accountId,
+        FEATURE_FLAGS.WAVOIP
+      );
+    },
+    currentChat() {
+      return this.$store.getters.getSelectedChat;
+    },
+    currentUser() {
+      return this.$store.getters.getCurrentUser;
+    },
+    assignableAgents() {
+      const inboxId = this.currentChat?.inbox_id;
+      if (!inboxId) {
+        return [];
+      }
+      return this.$store.getters['inboxAssignableAgents/getAssignableAgents'](
+        inboxId
+      );
+    },
+    isAgentForInbox() {
+      const userId = this.currentUser?.id;
+      return this.assignableAgents.some(agent => agent.id === userId);
+    },
+    showCallButton() {
+      return (
+        this.contact.phone_number &&
+        this.isWavoipFeatureEnabled &&
+        Object.keys(this.$store.state.webphone.wavoip).length > 0 &&
+        this.isAgentForInbox
+      );
     },
   },
   watch: {
@@ -170,6 +208,12 @@ export default {
     },
     openMergeModal() {
       this.showMergeModal = true;
+    },
+    callContact() {
+      this.$store.dispatch('webphone/outcomingCall', {
+        phone: this.contact.phone_number,
+        contact_name: this.contact.name,
+      });
     },
   },
 };
@@ -276,6 +320,15 @@ export default {
             />
           </template>
         </ComposeConversation>
+        <NextButton
+          v-if="showCallButton"
+          v-tooltip.top-end="$t('CONTACT_PANEL.CALL')"
+          icon="i-ph-phone"
+          slate
+          faded
+          sm
+          @click="callContact"
+        />
         <NextButton
           v-tooltip.top-end="$t('EDIT_CONTACT.BUTTON_LABEL')"
           icon="i-ph-pencil-simple"

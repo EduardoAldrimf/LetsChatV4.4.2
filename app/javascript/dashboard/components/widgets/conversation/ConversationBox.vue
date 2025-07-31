@@ -12,6 +12,7 @@ export default {
     EmptyState,
     MessagesView,
   },
+
   props: {
     inboxId: {
       type: [Number, String],

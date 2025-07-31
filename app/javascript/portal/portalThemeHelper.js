@@ -40,6 +40,7 @@ export const removeQueryParamsFromUrl = (queryParam = 'theme') => {
 export const updateThemeInHeader = theme => {
   // This function is to update the theme selection in the header in real time
   const themeToggleButton = document.getElementById('toggle-appearance');
+
   if (!themeToggleButton) return;
 
   const allThemeButtons = themeToggleButton.querySelectorAll('.theme-button');

@@ -71,7 +71,6 @@ const isActiveView = computed(() => route.name === 'contacts_dashboard_active');
 const hasAppliedFilters = computed(() => {
   return appliedFilters.value.length > 0;
 });
-
 const showEmptyStateLayout = computed(() => {
   return (
     !searchQuery.value &&

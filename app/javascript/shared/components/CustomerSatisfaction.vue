@@ -104,7 +104,6 @@ export default {
         this.isUpdating = false;
       }
     },
-
     selectRating(rating) {
       this.selectedRating = rating.value;
       this.onSubmit();

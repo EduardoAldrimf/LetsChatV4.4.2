@@ -1,0 +1,52 @@
+name: Limpiar enlaces Codex en PR
+
+on:
+  pull_request:
+    types: [opened, edited]
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  clean-codex-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Limpiar body de la PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const pattern = /https:\/\/chatgpt\.com\/codex\/tasks\/[0-9a-f]+/g;
+            if (pattern.test(pr.body)) {
+              const cleanBody = pr.body.replace(pattern, '').trim();
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                body: cleanBody,
+              });
+            }
+
+      - name: Limpiar comentarios de la PR
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const prNum = context.payload.pull_request.number;
+            const comments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNum,
+            });
+            const pattern = /https:\/\/chatgpt\.com\/codex\/tasks\/[0-9a-f]+/g;
+            for (const c of comments.data) {
+              if (pattern.test(c.body)) {
+                const clean = c.body.replace(pattern, '').trim();
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: c.id,
+                  body: clean,
+                });
+              }
+            }

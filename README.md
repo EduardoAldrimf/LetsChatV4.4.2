@@ -121,6 +121,10 @@ Chatwoot now supports 1-Click deployment to DigitalOcean as a kubernetes app.
 ### Other deployment options
 
 For other supported options, checkout our [deployment page](https://chatwoot.com/deploy).
+## WhatsApp Evolution API
+
+See [docs/evolution_integration.md](docs/evolution_integration.md) for details on using the Evolution provider and the Authorizations API used to create Evolution instances.
+
 
 ## Security
 

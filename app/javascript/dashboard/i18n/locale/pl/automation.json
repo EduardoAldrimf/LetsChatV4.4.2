@@ -147,19 +147,7 @@
       "SEND_ATTACHMENT": "Send Attachment",
       "SEND_MESSAGE": "Send a Message",
       "CHANGE_PRIORITY": "Zmień priorytet",
-      "ADD_SLA": "Add SLA",
-      "OPEN_CONVERSATION": "Otwórz rozmowę"
-    },
-    "MESSAGE_TYPES": {
-      "INCOMING": "Incoming Message",
-      "OUTGOING": "Outgoing Message"
-    },
-    "PRIORITY_TYPES": {
-      "NONE": "Brak",
-      "LOW": "Niski",
-      "MEDIUM": "Średni",
-      "HIGH": "Wysoki",
-      "URGENT": "Pilne"
+      "ADD_SLA": "Add SLA"
     },
     "ATTRIBUTES": {
       "MESSAGE_TYPE": "Message Type",

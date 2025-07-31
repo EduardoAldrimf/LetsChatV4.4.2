@@ -67,7 +67,6 @@ export const createCrudActions = (API, mutationTypes) => ({
   update: updateRecord(mutationTypes, API),
   delete: deleteRecord(mutationTypes, API),
 });
-
 export const createStore = options => {
   const { name, API, actions, getters } = options;
   const mutationTypes = generateMutationTypes(name);

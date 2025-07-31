@@ -5,13 +5,20 @@ class MessageFinder
   end
 
   def perform
-    current_messages
+    messages = current_messages
+    include_contact_conversations? ? inject_conversation_separators(messages) : messages
   end
 
   private
 
   def conversation_messages
-    @conversation.messages.includes(:attachments, :sender, sender: { avatar_attachment: [:blob] })
+    scope = if include_contact_conversations?
+              Message.joins(:conversation).where(conversation_id: contact_conversation_ids)
+            else
+              @conversation.messages
+            end
+
+    scope.includes(:attachments, :sender, sender: { avatar_attachment: [:blob] })
   end
 
   def messages
@@ -33,18 +40,60 @@ class MessageFinder
   end
 
   def messages_after(after_id)
-    messages.reorder('created_at asc').where('id > ?', after_id).limit(100)
+    messages.reorder(message_order(:asc)).where('messages.id > ?', after_id).limit(100)
   end
 
   def messages_before(before_id)
-    messages.reorder('created_at desc').where('id < ?', before_id).limit(20).reverse
+    messages.reorder(message_order(:desc)).where('messages.id < ?', before_id).limit(20).reverse
   end
 
   def messages_between(after_id, before_id)
-    messages.reorder('created_at asc').where('id >= ? AND id < ?', after_id, before_id).limit(1000)
+    messages.reorder(message_order(:asc)).where('messages.id >= ? AND messages.id < ?', after_id, before_id).limit(1000)
   end
 
   def messages_latest
-    messages.reorder('created_at desc').limit(20).reverse
+    messages.reorder(message_order(:desc)).limit(20).reverse
+  end
+
+  def message_order(direction)
+    if include_contact_conversations?
+      "conversations.created_at #{direction}, messages.created_at #{direction}"
+    else
+      "messages.created_at #{direction}"
+    end
+  end
+
+  def include_contact_conversations?
+    return false unless @conversation.account.feature_enabled?('conversation_history')
+
+    flag = if @params.key?(:include_contact_conversations)
+             @params[:include_contact_conversations]
+           else
+             contact_conversation_ids.length > 1
+           end
+
+    ActiveModel::Type::Boolean.new.cast(flag)
+  end
+
+  def contact_conversation_ids
+    @conversation
+      .contact
+      .conversations
+      .where(inbox_id: @conversation.inbox_id)
+      .order(:created_at)
+      .pluck(:id)
+  end
+
+  def inject_conversation_separators(messages)
+    result = []
+    current_id = nil
+    messages.each do |msg|
+      if current_id != msg.conversation_id
+        result << ConversationSeparatorMessage.new(msg.conversation)
+        current_id = msg.conversation_id
+      end
+      result << msg
+    end
+    result
   end
 end

@@ -1,8 +1,10 @@
 <script setup>
 import { computed } from 'vue';
 import { useUISettings } from 'dashboard/composables/useUISettings';
+import { useMapGetter } from 'dashboard/composables/store.js';
 import { formatNumber } from '@chatwoot/utils';
 import wootConstants from 'dashboard/constants/globals';
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
 import ConversationBasicFilter from './widgets/conversation/ConversationBasicFilter.vue';
 import SwitchLayout from 'dashboard/routes/dashboard/conversation/search/SwitchLayout.vue';
@@ -16,6 +18,7 @@ const props = defineProps({
   isOnExpandedLayout: { type: Boolean, required: true },
   conversationStats: { type: Object, required: true },
   isListLoading: { type: Boolean, required: true },
+  hideFiltersForAgent: { type: Boolean, default: false },
 });
 
 const emit = defineEmits([
@@ -27,6 +30,11 @@ const emit = defineEmits([
 ]);
 
 const { uiSettings, updateUISettings } = useUISettings();
+
+const currentAccountId = useMapGetter('getCurrentAccountId');
+const isFeatureEnabledonAccount = useMapGetter(
+  'accounts/isFeatureEnabledonAccount'
+);
 
 const onBasicFilterChange = (value, type) => {
   emit('basicFilterChange', value, type);
@@ -85,7 +93,7 @@ const toggleConversationLayout = () => {
         {{ $t(`CHAT_LIST.CHAT_STATUS_FILTER_ITEMS.${activeStatus}.TEXT`) }}
       </span>
     </div>
-    <div class="flex items-center gap-1">
+    <div v-if="!hideFiltersForAgent" class="flex items-center gap-1">
       <template v-if="hasAppliedFilters && !hasActiveFolders">
         <div class="relative">
           <NextButton

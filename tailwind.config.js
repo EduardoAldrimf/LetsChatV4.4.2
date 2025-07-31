@@ -193,12 +193,14 @@ const tailwindConfig = {
     },
     colors: {
       transparent: 'transparent',
-      white: '#fff',
-      'modal-backdrop-light': 'rgba(0, 0, 0, 0.4)',
-      'modal-backdrop-dark': 'rgba(0, 0, 0, 0.6)',
+      white: '#f8f9fa', // Color blanco más suave en modo claro
+      'modal-backdrop-light': 'rgba(22, 24, 23, 0.5)', // Un poco más oscuro
+      'modal-backdrop-dark': 'rgba(22, 24, 23, 0.6)',
       current: 'currentColor',
       ...colors,
-      body: slateDark.slate7,
+      body: colors.slate[100], // Un gris claro en lugar de blanco puro
+      border: colors.slate[200], // Bordes en gris medio
+      background: colors.slate[75], // Fondo en un gris más oscuro que el blanco
     },
     keyframes: {
       ...defaultTheme.keyframes,

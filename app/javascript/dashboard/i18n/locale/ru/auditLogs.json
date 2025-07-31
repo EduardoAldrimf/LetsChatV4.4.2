@@ -69,9 +69,6 @@
     },
     "ACCOUNT": {
       "EDIT": "{agentName} обновил настройки учетной записи (#{id})"
-    },
-    "CONVERSATION": {
-      "DELETE": "{agentName} deleted conversation #{id}"
     }
   }
 }

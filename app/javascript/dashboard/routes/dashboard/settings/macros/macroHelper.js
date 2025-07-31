@@ -10,6 +10,10 @@ export const emptyMacro = {
   visibility: 'global',
 };
 
+export const isValidSleepDuration = duration => {
+  return Number.isInteger(duration) && duration > 0;
+};
+
 export const resolveActionName = key => {
   return macroActionTypes.find(i => i.key === key).label;
 };

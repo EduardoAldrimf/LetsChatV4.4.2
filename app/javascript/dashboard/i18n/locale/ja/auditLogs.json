@@ -69,9 +69,6 @@
     },
     "ACCOUNT": {
       "EDIT": "{agentName} がアカウント設定 (#{id}) を更新しました"
-    },
-    "CONVERSATION": {
-      "DELETE": "{agentName} deleted conversation #{id}"
     }
   }
 }

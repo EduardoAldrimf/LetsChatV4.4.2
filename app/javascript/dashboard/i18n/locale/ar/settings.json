@@ -76,12 +76,7 @@
       "ACCESS_TOKEN": {
         "TITLE": "رمز المصادقة",
         "NOTE": "يمكن استخدام هذا رمز المصادقة إذا كنت تبني تطبيقات API للتكامل مع Chatwoot",
-        "COPY": "نسخ",
-        "RESET": "Reset",
-        "CONFIRM_RESET": "Are you sure?",
-        "CONFIRM_HINT": "Click again to confirm",
-        "RESET_SUCCESS": "Access token regenerated successfully",
-        "RESET_ERROR": "Unable to regenerate access token. Please try again"
+        "COPY": "نسخ"
       },
       "AUDIO_NOTIFICATIONS_SECTION": {
         "TITLE": "Audio Alerts",
@@ -190,8 +185,7 @@
           "OFFLINE": "غير متصل"
         },
         "SET_AVAILABILITY_SUCCESS": "تم تعيين التوافر بنجاح",
-        "SET_AVAILABILITY_ERROR": "تعذر تعيين التوافر، الرجاء المحاولة مرة أخرى",
-        "IMPERSONATING_ERROR": "Cannot change availability while impersonating a user"
+        "SET_AVAILABILITY_ERROR": "تعذر تعيين التوافر، الرجاء المحاولة مرة أخرى"
       },
       "EMAIL": {
         "LABEL": "عنوان البريد الإلكتروني الخاص بك",
@@ -286,7 +280,6 @@
     "REPORTS": "التقارير",
     "SETTINGS": "الإعدادات",
     "CONTACTS": "جهات الاتصال",
-    "ACTIVE": "مفعل",
     "CAPTAIN": "قائد",
     "CAPTAIN_ASSISTANTS": "Assistants",
     "CAPTAIN_DOCUMENTS": "Documents",

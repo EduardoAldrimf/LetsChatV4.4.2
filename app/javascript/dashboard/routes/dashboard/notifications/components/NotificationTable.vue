@@ -110,7 +110,7 @@ export default {
             <Thumbnail
               v-if="notificationItem.primary_actor.meta.assignee"
               :src="notificationItem.primary_actor.meta.assignee.thumbnail"
-              size="28px"
+              size="36px"
               :username="notificationItem.primary_actor.meta.assignee.name"
             />
           </td>

@@ -227,7 +227,9 @@
           "WHATSAPP_CLOUD": "WhatsApp Cloud",
           "WHATSAPP_CLOUD_DESC": "Quick setup through Meta",
           "TWILIO_DESC": "Connect via Twilio credentials",
-          "360_DIALOG": "360Dialog"
+          "360_DIALOG": "360Dialog",
+          "EVOLUTION": "Evolution",
+          "EVOLUTION_DESC": "Connect via Evolution API"
         },
         "SELECT_PROVIDER": {
           "TITLE": "Select your API provider",
@@ -295,6 +297,77 @@
         },
         "API": {
           "ERROR_MESSAGE": "We were not able to save the WhatsApp channel"
+        }
+      },
+      "EVOLUTION": {
+        "TITLE": "Evolution Integration",
+        "DESC": "Manage your Evolution WhatsApp connection.",
+        "INSTANCE_NAME_ERROR": "Instance name is required",
+        "MANAGEMENT": {
+          "TITLE": "Instance Management",
+          "SUBTITLE": "Control the connection status"
+        },
+        "STATUS": {
+          "LABEL": "Status:",
+          "REFRESH": "Refresh",
+          "REFRESHED": "Status updated"
+        },
+        "QR_CODE": {
+          "TITLE": "QR Code",
+          "INSTRUCTIONS": "Scan this code with WhatsApp to connect.",
+          "GENERATE": "Generate QR Code",
+          "SUCCESS": "QR code generated",
+          "NO_QR": "QR code not available",
+          "ERROR": "Failed to generate QR code"
+        },
+        "DISCONNECT": {
+          "BUTTON": "Disconnect",
+          "SUCCESS": "Instance disconnected",
+          "ERROR": "Failed to disconnect instance"
+        },
+        "PROXY": {
+          "TITLE": "Proxy Settings",
+          "SUBTITLE": "Configure proxy for Evolution API",
+          "ENABLE": "Enable Proxy",
+          "HOST": "Host",
+          "HOST_PLACEHOLDER": "Proxy host",
+          "PORT": "Port",
+          "PORT_PLACEHOLDER": "Proxy port",
+          "USERNAME": "Username",
+          "USERNAME_PLACEHOLDER": "Proxy username",
+          "PASSWORD": "Password",
+          "PASSWORD_PLACEHOLDER": "Proxy password",
+          "UPDATE": "Update Proxy",
+          "SUCCESS": "Proxy updated",
+          "ERROR": "Failed to update proxy",
+          "VALIDATION_ERROR": "Invalid proxy configuration"
+        },
+        "SETTINGS": {
+          "TITLE": "Advanced Settings",
+          "SUBTITLE": "Control Evolution behaviour",
+          "CALLS": {
+            "TITLE": "Calls",
+            "REJECT": "Reject calls",
+            "MESSAGE": "Reject message",
+            "MESSAGE_PLACEHOLDER": "I do not accept calls"
+          },
+          "GROUPS": {
+            "TITLE": "Groups",
+            "IGNORE": "Ignore group messages"
+          },
+          "STATUS": {
+            "TITLE": "Status",
+            "ALWAYS_ONLINE": "Always online"
+          },
+          "MESSAGES": {
+            "TITLE": "Messages",
+            "READ": "Mark as read",
+            "READ_STATUS": "Send read status",
+            "SYNC_HISTORY": "Sync full history"
+          },
+          "UPDATE": "Update Settings",
+          "SUCCESS": "Settings updated",
+          "ERROR": "Failed to update settings"
         }
       },
       "VOICE": {
@@ -600,7 +673,13 @@
       "WHATSAPP_SECTION_UPDATE_BUTTON": "Update",
       "WHATSAPP_WEBHOOK_TITLE": "Webhook Verification Token",
       "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
-      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings",
+      "AGENT_PERMISSIONS": "Agent Permissions",
+      "AGENT_PERMISSIONS_SUB_TEXT": "Update agent permissions for this inbox",
+      "AGENT_ALLOW_TO_DELETE_MESSAGE": "Allow an agent to delete a message",
+      "AGENT_ALLOW_TO_DELETE_MESSAGE_SUB_TEXT": "Allow an agent to delete a message from a conversation.",
+      "EXTERNAL_TOKEN": "Token Wavoip",
+      "EXTERNAL_TOKEN_PLACEHOLDER": "Enter the token"
     },
     "HELP_CENTER": {
       "LABEL": "Help Center",
@@ -858,8 +937,7 @@
       "TELEGRAM": "Telegram",
       "LINE": "Line",
       "API": "API Channel",
-      "INSTAGRAM": "Instagram",
-      "VOICE": "Voice"
+      "INSTAGRAM": "Instagram"
     }
   }
 }

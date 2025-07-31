@@ -22,6 +22,11 @@ class Macros::ExecutionService < ActionService
 
   private
 
+  def sleep_m(params)
+    duration = params[0].to_i
+    sleep(duration) if duration.positive?
+  end
+
   def assign_agent(agent_ids)
     agent_ids = agent_ids.map { |id| id == 'self' ? @user.id : id }
     super(agent_ids)

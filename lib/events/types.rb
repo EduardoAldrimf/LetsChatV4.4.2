@@ -55,6 +55,10 @@ module Events::Types
   AGENT_ADDED = 'agent.added'
   AGENT_REMOVED = 'agent.removed'
 
+  # whatsapp events
+  WHATSAPP_QRCODE_UPDATED = 'whatsapp.qrcode_updated'
+  WHATSAPP_CONNECTION_UPDATE = 'whatsapp.connection_update'
+
   # copilot events
   COPILOT_MESSAGE_CREATED = 'copilot.message.created'
 end

@@ -362,7 +362,6 @@ export const matchesFilters = (conversation, filters) => {
       conversation,
       filters[0].attribute_key
     );
-
     return matchesCondition(value, filters[0]);
   }
 

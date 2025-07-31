@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Търсене",
       "EMPTY_STATE": "Няма намерени резултати"
-    },
-    "CLOSE": "Close"
+    }
   }
 }

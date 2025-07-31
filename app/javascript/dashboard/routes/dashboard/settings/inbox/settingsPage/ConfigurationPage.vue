@@ -7,6 +7,7 @@ import SmtpSettings from '../SmtpSettings.vue';
 import { useVuelidate } from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+import WhatsappEvolutionSettings from 'dashboard/components/WhatsappEvolutionSettings.vue';
 
 export default {
   components: {
@@ -14,6 +15,7 @@ export default {
     ImapSettings,
     SmtpSettings,
     NextButton,
+    WhatsappEvolutionSettings,
   },
   mixins: [inboxMixin],
   props: {
@@ -193,6 +195,9 @@ export default {
     </div>
     <ImapSettings :inbox="inbox" />
     <SmtpSettings v-if="inbox.imap_enabled" :inbox="inbox" />
+  </div>
+  <div v-else-if="isAWhatsAppChannel && inbox.provider === 'evolution'">
+    <WhatsappEvolutionSettings :inbox="inbox" />
   </div>
   <div v-else-if="isAWhatsAppChannel && !isATwilioChannel">
     <div v-if="inbox.provider_config" class="mx-8">

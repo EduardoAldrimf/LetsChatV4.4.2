@@ -67,6 +67,7 @@ import {
 import { matchesFilters } from '../store/modules/conversations/helpers/filterHelpers';
 import { CONVERSATION_EVENTS } from '../helper/AnalyticsHelper/events';
 import { ASSIGNEE_TYPE_TAB_PERMISSIONS } from 'dashboard/constants/permissions.js';
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
 
@@ -89,7 +90,6 @@ const store = useStore();
 
 const conversationListRef = ref(null);
 const conversationDynamicScroller = ref(null);
-
 provide('contextMenuElementTarget', conversationDynamicScroller);
 
 const activeAssigneeTab = ref(wootConstants.ASSIGNEE_TYPE.ME);
@@ -110,6 +110,7 @@ const advancedFilterTypes = ref(
     attributeName: t(`FILTER.ATTRIBUTES.${filter.attributeI18nKey}`),
   }))
 );
+const isInitialLoad = ref(false);
 
 const currentUser = useMapGetter('getCurrentUser');
 const chatLists = useMapGetter('getFilteredConversations');
@@ -127,6 +128,9 @@ const inboxesList = useMapGetter('inboxes/getInboxes');
 const campaigns = useMapGetter('campaigns/getAllCampaigns');
 const labels = useMapGetter('labels/getLabels');
 const currentAccountId = useMapGetter('getCurrentAccountId');
+const isFeatureEnabledonAccount = useMapGetter(
+  'accounts/isFeatureEnabledonAccount'
+);
 // We can't useFunctionGetter here since it needs to be called on setup?
 const getTeamFn = useMapGetter('teams/getTeam');
 
@@ -197,8 +201,28 @@ const userPermissions = computed(() => {
   return getUserPermissions(currentUser.value, currentAccountId.value);
 });
 
+const hideAllChatsForAgent = computed(() => {
+  if (currentUser.value.role === 'administrator') {
+    return false;
+  }
+  return isFeatureEnabledonAccount.value(
+    currentAccountId.value,
+    FEATURE_FLAGS.HIDE_ALL_CHATS_FOR_AGENT
+  );
+});
+
+const hideUnassignedForAgent = computed(() => {
+  if (currentUser.value.role === 'administrator') {
+    return false;
+  }
+  return isFeatureEnabledonAccount.value(
+    currentAccountId.value,
+    FEATURE_FLAGS.HIDE_UNASSIGNED_FOR_AGENT
+  );
+});
+
 const assigneeTabItems = computed(() => {
-  return filterItemsByPermission(
+  let tabItems = filterItemsByPermission(
     ASSIGNEE_TYPE_TAB_PERMISSIONS,
     userPermissions.value,
     item => item.permissions
@@ -207,6 +231,22 @@ const assigneeTabItems = computed(() => {
     name: t(`CHAT_LIST.ASSIGNEE_TYPE_TABS.${key}`),
     count: conversationStats.value[countKey] || 0,
   }));
+
+  // Filtrar la pestaña "ALL" cuando HIDE_ALL_CHATS_FOR_AGENT está habilitado
+  if (hideAllChatsForAgent.value) {
+    tabItems = tabItems.filter(
+      item => item.key !== wootConstants.ASSIGNEE_TYPE.ALL
+    );
+  }
+
+  // Filtrar la pestaña "UNASSIGNED" cuando HIDE_UNASSIGNED_FOR_AGENT está habilitado
+  if (hideUnassignedForAgent.value) {
+    tabItems = tabItems.filter(
+      item => item.key !== wootConstants.ASSIGNEE_TYPE.UNASSIGNED
+    );
+  }
+
+  return tabItems;
 });
 
 const showAssigneeInConversationCard = computed(() => {
@@ -350,6 +390,17 @@ const showEndOfListMessage = computed(() => {
   );
 });
 
+const hideFiltersForAgent = computed(() => {
+  // No aplicar restricción si el usuario es administrador
+  if (currentUser.value.role === 'administrator') {
+    return false;
+  }
+  return isFeatureEnabledonAccount.value(
+    currentAccountId.value,
+    FEATURE_FLAGS.HIDE_FILTERS_FOR_AGENT
+  );
+});
+
 const allConversationsSelected = computed(() => {
   return (
     conversationList.value.length === selectedConversations.value.length &&
@@ -377,6 +428,7 @@ function setFiltersFromUISettings() {
 
 function emitConversationLoaded() {
   emit('conversationLoad');
+  isInitialLoad.value = false;
   // [VITE] removing this since the library has changed
   // nextTick(() => {
   //   // Addressing a known issue in the virtual list library where dynamically added items
@@ -421,6 +473,7 @@ function onApplyFilter(payload) {
   foldersQuery.value = filterQueryGenerator(payload);
   store.dispatch('conversationPage/reset');
   store.dispatch('emptyAllConversations');
+  isInitialLoad.value = true;
   fetchFilteredConversations(payload);
 }
 
@@ -575,6 +628,7 @@ function resetAndFetchData() {
   store.dispatch('conversationPage/reset');
   store.dispatch('emptyAllConversations');
   store.dispatch('clearConversationFilters');
+  isInitialLoad.value = true;
   if (hasActiveFolders.value) {
     const payload = activeFolder.value.query;
     fetchSavedFilteredConversations(payload);
@@ -612,6 +666,16 @@ function handleScroll() {
 }
 
 function updateAssigneeTab(selectedTab) {
+  // Si el usuario intenta seleccionar una pestaña oculta, no permitirlo
+  if (
+    (selectedTab === wootConstants.ASSIGNEE_TYPE.ALL &&
+      hideAllChatsForAgent.value) ||
+    (selectedTab === wootConstants.ASSIGNEE_TYPE.UNASSIGNED &&
+      hideUnassignedForAgent.value)
+  ) {
+    return;
+  }
+
   if (activeAssigneeTab.value !== selectedTab) {
     resetBulkActions();
     emitter.emit('clearSearchInput');
@@ -697,7 +761,26 @@ async function markAsUnread(conversationId) {
     await store.dispatch('markMessagesUnread', {
       id: conversationId,
     });
-    redirectToConversationList();
+    const {
+      params: { accountId, inbox_id: inboxId, label, teamId },
+      name,
+    } = useRoute();
+    let conversationType = '';
+    if (isOnMentionsView({ route: { name } })) {
+      conversationType = 'mention';
+    } else if (isOnUnattendedView({ route: { name } })) {
+      conversationType = 'unattended';
+    }
+    router.push(
+      conversationListPageURL({
+        accountId,
+        conversationType: conversationType,
+        customViewId: props.foldersId,
+        inboxId,
+        label,
+        teamId,
+      })
+    );
   } catch (error) {
     // Ignore error
   }
@@ -711,7 +794,6 @@ async function markAsRead(conversationId) {
     // Ignore error
   }
 }
-
 async function onAssignTeam(team, conversationId = null) {
   try {
     await store.dispatch('assignTeam', {
@@ -764,6 +846,19 @@ useEmitter('fetch_conversation_stats', () => {
 useEventListener(conversationDynamicScroller, 'scroll', handleScroll);
 
 onMounted(() => {
+  // Si la pestaña actual está deshabilitada por un feature flag, cambiar a una pestaña disponible
+  if (
+    (activeAssigneeTab.value === wootConstants.ASSIGNEE_TYPE.ALL &&
+      hideAllChatsForAgent.value) ||
+    (activeAssigneeTab.value === wootConstants.ASSIGNEE_TYPE.UNASSIGNED &&
+      hideUnassignedForAgent.value)
+  ) {
+    // Buscar la primera pestaña disponible (que no esté oculta)
+    const availableTab =
+      assigneeTabItems.value[0]?.key || wootConstants.ASSIGNEE_TYPE.ME;
+    activeAssigneeTab.value = availableTab;
+  }
+
   store.dispatch('setChatListFilters', conversationFilters.value);
   setFiltersFromUISettings();
   store.dispatch('setChatStatusFilter', activeStatus.value);
@@ -855,6 +950,7 @@ watch(conversationFilters, (newVal, oldVal) => {
       :has-active-folders="hasActiveFolders"
       :active-status="activeStatus"
       :is-on-expanded-layout="isOnExpandedLayout"
+      :hide-filters-for-agent="hideFiltersForAgent"
       :conversation-stats="conversationStats"
       :is-list-loading="chatListLoading && !conversationList.length"
       @add-folders="onClickOpenAddFoldersModal"

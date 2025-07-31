@@ -45,12 +45,9 @@
     "WATCH_VIDEO": "Watch video"
   },
   "DURATION_INPUT": {
-    "MINUTES": "Minutos",
-    "HOURS": "Horas",
-    "DAYS": "Dias",
-    "PLACEHOLDER": "Introduza a duração"
-  },
-  "CHANNEL_SELECTOR": {
-    "COMING_SOON": "Em Breve!"
+    "MINUTES": "Minutes",
+    "HOURS": "Hours",
+    "DAYS": "Days",
+    "PLACEHOLDER": "Enter duration"
   }
 }

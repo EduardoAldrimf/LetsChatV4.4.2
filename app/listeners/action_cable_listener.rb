@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ClassLength
 class ActionCableListener < BaseListener
   include Events::Types
 
@@ -150,6 +151,34 @@ class ActionCableListener < BaseListener
     broadcast(account, [account_token(account)], CONTACT_MERGED, contact.push_event_data)
   end
 
+  def whatsapp_qrcode_updated(event)
+    inbox = event.data[:inbox]
+    account = inbox.account
+    tokens = user_tokens(account, inbox.members) + [account_token(account)]
+
+    broadcast(
+      account,
+      tokens,
+      WHATSAPP_QRCODE_UPDATED,
+      inbox_id: inbox.id,
+      qr_code: event.data[:qr_code]
+    )
+  end
+
+  def whatsapp_connection_update(event)
+    inbox = event.data[:inbox]
+    account = inbox.account
+    tokens = user_tokens(account, inbox.members) + [account_token(account)]
+
+    broadcast(
+      account,
+      tokens,
+      WHATSAPP_CONNECTION_UPDATE,
+      inbox_id: inbox.id,
+      status: event.data[:status]
+    )
+  end
+
   def contact_deleted(event)
     contact, account = extract_contact_and_account(event)
     broadcast(account, [account_token(account)], CONTACT_DELETED, contact.push_event_data)
@@ -206,3 +235,4 @@ class ActionCableListener < BaseListener
 end
 
 ActionCableListener.prepend_mod_with('ActionCableListener')
+# rubocop:enable Metrics/ClassLength

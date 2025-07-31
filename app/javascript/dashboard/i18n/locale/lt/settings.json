@@ -76,12 +76,7 @@
       "ACCESS_TOKEN": {
         "TITLE": "Prieeigos raktas",
         "NOTE": "Šis prieigos raktas gali būti naudojamas, jei kuriate API pagrįstą integraciją",
-        "COPY": "Kopijuoti",
-        "RESET": "Reset",
-        "CONFIRM_RESET": "Are you sure?",
-        "CONFIRM_HINT": "Click again to confirm",
-        "RESET_SUCCESS": "Access token regenerated successfully",
-        "RESET_ERROR": "Unable to regenerate access token. Please try again"
+        "COPY": "Kopijuoti"
       },
       "AUDIO_NOTIFICATIONS_SECTION": {
         "TITLE": "Audio Alerts",
@@ -190,8 +185,7 @@
           "OFFLINE": "Atsijungęs"
         },
         "SET_AVAILABILITY_SUCCESS": "Pasiekiamumas nustatytas sėkmingai",
-        "SET_AVAILABILITY_ERROR": "Nepavyko nustatyti pasiekiamumo, bandykite dar kartą",
-        "IMPERSONATING_ERROR": "Cannot change availability while impersonating a user"
+        "SET_AVAILABILITY_ERROR": "Nepavyko nustatyti pasiekiamumo, bandykite dar kartą"
       },
       "EMAIL": {
         "LABEL": "Jūsų el. pašto adresas",
@@ -286,7 +280,6 @@
     "REPORTS": "Ataskaitos",
     "SETTINGS": "Nustatymai",
     "CONTACTS": "Kontaktai",
-    "ACTIVE": "Aktyvus",
     "CAPTAIN": "Captain",
     "CAPTAIN_ASSISTANTS": "Assistants",
     "CAPTAIN_DOCUMENTS": "Documents",

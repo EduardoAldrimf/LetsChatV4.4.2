@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "חפש",
       "EMPTY_STATE": "לא נמצאו תוצאות"
-    },
-    "CLOSE": "סגור"
+    }
   }
 }

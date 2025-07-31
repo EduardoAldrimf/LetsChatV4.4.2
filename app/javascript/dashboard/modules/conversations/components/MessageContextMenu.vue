@@ -14,6 +14,7 @@ import {
 import MenuItem from '../../../components/widgets/conversation/contextMenu/menuItem.vue';
 import { useTrack } from 'dashboard/composables';
 import NextButton from 'dashboard/components-next/button/Button.vue';
+import ForwardModal from 'dashboard/components/widgets/conversation/ForwardModal.vue';
 
 export default {
   components: {
@@ -21,6 +22,7 @@ export default {
     MenuItem,
     ContextMenu,
     NextButton,
+    ForwardModal,
   },
   props: {
     message: {
@@ -47,7 +49,6 @@ export default {
   emits: ['open', 'close', 'replyTo'],
   setup() {
     const { getPlainText } = useMessageFormatter();
-
     return {
       getPlainText,
     };
@@ -56,6 +57,7 @@ export default {
     return {
       isCannedResponseModalOpen: false,
       showDeleteModal: false,
+      showForwardModal: false,
     };
   },
   computed: {
@@ -149,6 +151,13 @@ export default {
     closeDeleteModal() {
       this.showDeleteModal = false;
     },
+    handleForward() {
+      this.handleClose();
+      this.showForwardModal = true;
+    },
+    onCloseForwardModal() {
+      this.showForwardModal = false;
+    },
   },
 };
 </script>
@@ -177,6 +186,12 @@ export default {
       :message="$t('CONVERSATION.CONTEXT_MENU.DELETE_CONFIRMATION.MESSAGE')"
       :confirm-text="$t('CONVERSATION.CONTEXT_MENU.DELETE_CONFIRMATION.DELETE')"
       :reject-text="$t('CONVERSATION.CONTEXT_MENU.DELETE_CONFIRMATION.CANCEL')"
+    />
+    <ForwardModal
+      v-if="showForwardModal"
+      v-model:show="showForwardModal"
+      :message="message"
+      @close="onCloseForwardModal"
     />
     <NextButton
       v-if="!hideButton"
@@ -220,6 +235,11 @@ export default {
           }"
           variant="icon"
           @click.stop="handleTranslate"
+        />
+        <MenuItem
+          :option="{ icon: 'share', label: $t('FORWARD_MODAL.SUBMIT') }"
+          variant="icon"
+          @click.stop="handleForward"
         />
         <hr />
         <MenuItem

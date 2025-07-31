@@ -99,13 +99,6 @@
       "CHANGE_PRIORITY": "Change Priority",
       "ADD_PRIVATE_NOTE": "Přidat soukromou poznámku",
       "SEND_WEBHOOK_EVENT": "Poslat událost webhook"
-    },
-    "PRIORITY_TYPES": {
-      "NONE": "Nic",
-      "LOW": "Low",
-      "MEDIUM": "Medium",
-      "HIGH": "High",
-      "URGENT": "Urgent"
     }
   }
 }

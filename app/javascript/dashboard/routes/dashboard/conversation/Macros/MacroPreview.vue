@@ -33,6 +33,7 @@ const getActionValue = (key, params) => {
     send_message: params[0],
     send_email_transcript: params[0],
     add_private_note: params[0],
+    sleep_m: params[0],
   };
   return actionsMap[key] || '';
 };

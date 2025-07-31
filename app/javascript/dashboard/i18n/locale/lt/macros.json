@@ -99,13 +99,6 @@
       "CHANGE_PRIORITY": "Pakeisti Prioritetą",
       "ADD_PRIVATE_NOTE": "Add a Private Note",
       "SEND_WEBHOOK_EVENT": "Send Webhook Event"
-    },
-    "PRIORITY_TYPES": {
-      "NONE": "Nėra",
-      "LOW": "Žemas",
-      "MEDIUM": "Vidutinis",
-      "HIGH": "Aukštas",
-      "URGENT": "Skubus"
     }
   }
 }

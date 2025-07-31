@@ -4,14 +4,12 @@
       "ALL": "Hepsi",
       "CONTACTS": "Kişiler",
       "CONVERSATIONS": "Konuşmalar",
-      "MESSAGES": "Mesajlar",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Mesajlar"
     },
     "SECTION": {
       "CONTACTS": "Kişiler",
       "CONVERSATIONS": "Konuşmalar",
-      "MESSAGES": "Mesajlar",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Mesajlar"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

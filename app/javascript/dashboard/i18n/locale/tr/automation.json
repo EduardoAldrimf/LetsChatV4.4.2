@@ -130,49 +130,37 @@
     "EVENTS": {
       "CONVERSATION_CREATED": "Görüşme Oluşturuldu",
       "CONVERSATION_UPDATED": "Görüşme Güncellendi",
-      "MESSAGE_CREATED": "Mesaj Oluşturuldu",
-      "CONVERSATION_OPENED": "Sohbet Açıldı"
+      "MESSAGE_CREATED": "Message Created",
+      "CONVERSATION_OPENED": "Conversation Opened"
     },
     "ACTIONS": {
-      "ASSIGN_AGENT": "Temsilciye Ata",
-      "ASSIGN_TEAM": "Bir Ekibe Ata",
-      "ADD_LABEL": "Etiket Ekle",
-      "REMOVE_LABEL": "Etiketi Kaldır",
-      "SEND_EMAIL_TO_TEAM": "Ekibe E-posta Gönder",
-      "SEND_EMAIL_TRANSCRIPT": "E-posta Dökümü Gönder",
+      "ASSIGN_AGENT": "Assign to Agent",
+      "ASSIGN_TEAM": "Assign a Team",
+      "ADD_LABEL": "Add a Label",
+      "REMOVE_LABEL": "Remove a Label",
+      "SEND_EMAIL_TO_TEAM": "Send an Email to Team",
+      "SEND_EMAIL_TRANSCRIPT": "Send an Email Transcript",
       "MUTE_CONVERSATION": "Konuşmayı Sessize Al",
       "SNOOZE_CONVERSATION": "Konuşmayı Ertele",
       "RESOLVE_CONVERSATION": "Görüşmeyi çöz",
-      "SEND_WEBHOOK_EVENT": "Webhook Olayı Gönder",
-      "SEND_ATTACHMENT": "Ek Gönder",
-      "SEND_MESSAGE": "Mesaj Gönder",
+      "SEND_WEBHOOK_EVENT": "Send Webhook Event",
+      "SEND_ATTACHMENT": "Send Attachment",
+      "SEND_MESSAGE": "Send a Message",
       "CHANGE_PRIORITY": "Önceliği Değiştir",
-      "ADD_SLA": "Add SLA",
-      "OPEN_CONVERSATION": "Görüşmeyi aç"
-    },
-    "MESSAGE_TYPES": {
-      "INCOMING": "Incoming Message",
-      "OUTGOING": "Outgoing Message"
-    },
-    "PRIORITY_TYPES": {
-      "NONE": "Hiç",
-      "LOW": "Düşük",
-      "MEDIUM": "Orta",
-      "HIGH": "Yüksek",
-      "URGENT": "Acil"
+      "ADD_SLA": "Add SLA"
     },
     "ATTRIBUTES": {
-      "MESSAGE_TYPE": "Mesaj Türü",
-      "MESSAGE_CONTAINS": "Mesaj İçerir",
+      "MESSAGE_TYPE": "Message Type",
+      "MESSAGE_CONTAINS": "Message Contains",
       "EMAIL": "E-Posta",
       "INBOX": "Gelen Kutusu",
-      "CONVERSATION_LANGUAGE": "Sohbet Dili",
+      "CONVERSATION_LANGUAGE": "Conversation Language",
       "PHONE_NUMBER": "Telefon Numarası",
       "STATUS": "Durum",
       "BROWSER_LANGUAGE": "Tarayıcı Dili",
-      "MAIL_SUBJECT": "E-posta Konusu",
+      "MAIL_SUBJECT": "Email Subject",
       "COUNTRY_NAME": "Ülke",
-      "REFERER_LINK": "Yönlendiren Bağlantı",
+      "REFERER_LINK": "Referrer Link",
       "ASSIGNEE_NAME": "Assignee",
       "TEAM_NAME": "Ekip",
       "PRIORITY": "Öncelik"

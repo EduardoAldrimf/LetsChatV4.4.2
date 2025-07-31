@@ -20,6 +20,7 @@ import inboxMixin, { INBOX_FEATURES } from 'shared/mixins/inboxMixin';
 
 // utils
 import { emitter } from 'shared/helpers/mitt';
+import EvolutionAPI from 'dashboard/api/evolution';
 import { getTypingUsersText } from '../../../helper/commons';
 import { calculateScrollTop } from './helpers/scrollTopCalculationHelper';
 import { LocalStorage } from 'shared/helpers/localStorage';
@@ -88,6 +89,7 @@ export default {
       isProgrammaticScroll: false,
       messageSentSinceOpened: false,
       labelSuggestions: [],
+      connectionStatus: 'close',
     };
   },
 
@@ -177,6 +179,9 @@ export default {
 
     replyWindowBannerMessage() {
       if (this.isAWhatsAppChannel) {
+        if (this.whatsAppAPIProvider === 'evolution') {
+          return '';
+        }
         return this.$t('CONVERSATION.TWILIO_WHATSAPP_CAN_REPLY');
       }
       if (this.isAPIInbox) {
@@ -198,6 +203,9 @@ export default {
       return this.$t('CONVERSATION.CANNOT_REPLY');
     },
     replyWindowLink() {
+      if (this.whatsAppAPIProvider === 'evolution') {
+        return '';
+      }
       if (this.isAFacebookInbox || this.isAnInstagramChannel) {
         return REPLY_POLICY.FACEBOOK;
       }
@@ -210,6 +218,9 @@ export default {
       return '';
     },
     replyWindowLinkText() {
+      if (this.whatsAppAPIProvider === 'evolution') {
+        return '';
+      }
       if (
         this.isAWhatsAppChannel ||
         this.isAFacebookInbox ||
@@ -234,6 +245,9 @@ export default {
           : 'CONVERSATION.UNREAD_MESSAGE';
       return `${count} ${this.$t(label)}`;
     },
+    showConnectionBanner() {
+      return this.connectionStatus === 'close';
+    },
     inboxSupportsReplyTo() {
       const incoming = this.inboxHasFeature(INBOX_FEATURES.REPLY_TO);
       const outgoing =
@@ -252,6 +266,12 @@ export default {
       this.fetchAllAttachmentsFromCurrentChat();
       this.fetchSuggestions();
       this.messageSentSinceOpened = false;
+      this.fetchConnectionStatus();
+    },
+    inbox(newInbox, oldInbox) {
+      if (newInbox && newInbox !== oldInbox) {
+        this.fetchConnectionStatus();
+      }
     },
   },
 
@@ -264,6 +284,8 @@ export default {
     emitter.on(BUS_EVENTS.MESSAGE_SENT, () => {
       this.messageSentSinceOpened = true;
     });
+    emitter.on(BUS_EVENTS.WHATSAPP_CONNECTION_UPDATE, this.onConnectionUpdate);
+    this.fetchConnectionStatus();
   },
 
   mounted() {
@@ -275,6 +297,7 @@ export default {
   unmounted() {
     this.removeBusListeners();
     this.removeScrollListener();
+    emitter.off(BUS_EVENTS.WHATSAPP_CONNECTION_UPDATE, this.onConnectionUpdate);
   },
 
   methods: {
@@ -336,6 +359,10 @@ export default {
         if (messageElement) {
           this.isProgrammaticScroll = true;
           messageElement.scrollIntoView({ behavior: 'smooth' });
+          messageElement.classList.add('bg-n-brand');
+          setTimeout(() => {
+            messageElement.classList.remove('bg-n-brand');
+          }, 1000);
           this.fetchPreviousMessages();
         } else {
           this.scrollToBottom();
@@ -437,6 +464,63 @@ export default {
     makeMessagesRead() {
       this.$store.dispatch('markMessagesRead', { id: this.currentChat.id });
     },
+
+    onConnectionUpdate(payload) {
+      if (payload.inbox_id === this.inboxId) {
+        this.connectionStatus = payload.status;
+      }
+    },
+
+    async fetchConnectionStatus() {
+      const {
+        channel_type: channelType,
+        channel = {},
+        provider_config: providerConfig,
+      } = this.inbox || {};
+
+      if (
+        channelType !== 'Channel::Whatsapp' ||
+        channel.provider !== 'evolution'
+      ) {
+        this.connectionStatus = null;
+        return;
+      }
+
+      if (!providerConfig) {
+        this.connectionStatus = null;
+        return;
+      }
+
+      try {
+        const instances = await EvolutionAPI.fetchInstances(
+          this.inbox.provider_config.api_url,
+          this.inbox.provider_config.admin_token
+        );
+
+        const instance = instances.find(inst => {
+          return (
+            inst.name === this.inbox.provider_config.instance_name ||
+            inst.instanceName === this.inbox.provider_config.instance_name
+          );
+        });
+
+        if (instance) {
+          this.connectionStatus =
+            instance.connectionStatus || instance.state || instance.status;
+        } else {
+          this.connectionStatus = 'close';
+        }
+      } catch (e) {
+        // Ignore errors and keep the existing status
+      }
+    },
+
+    goToInboxSettings() {
+      this.$router.push({
+        name: 'settings_inbox_show',
+        params: { accountId: this.currentAccountId, inboxId: this.inboxId },
+      });
+    },
   },
 };
 </script>
@@ -444,7 +528,16 @@ export default {
 <template>
   <div class="flex flex-col justify-between flex-grow h-full min-w-0 m-0">
     <Banner
-      v-if="!currentChat.can_reply"
+      v-if="showConnectionBanner"
+      color-scheme="alert"
+      class="mx-2 mt-2 overflow-hidden rounded-lg"
+      :banner-message="$t('INBOX_MGMT.RECONNECTION_REQUIRED')"
+      has-action-button
+      :action-button-label="$t('INBOX_MGMT.CLICK_TO_RECONNECT')"
+      @primary-action="goToInboxSettings"
+    />
+    <Banner
+      v-if="!currentChat.can_reply && whatsAppAPIProvider !== 'evolution'"
       color-scheme="alert"
       class="mx-2 mt-2 overflow-hidden rounded-lg"
       :banner-message="replyWindowBannerMessage"
@@ -501,7 +594,7 @@ export default {
       class="flex relative flex-col"
       :class="{
         'modal-mask': isPopOutReplyBox,
-        'bg-n-background': !isPopOutReplyBox,
+        'bg-n-solid-2': !isPopOutReplyBox,
       }"
     >
       <div

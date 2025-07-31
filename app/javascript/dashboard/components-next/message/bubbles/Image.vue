@@ -56,7 +56,7 @@ const downloadAttachment = async () => {
     </div>
     <div v-else class="relative group rounded-lg overflow-hidden">
       <img
-        class="skip-context-menu"
+        class="skip-context-menu max-w-80"
         :src="attachment.dataUrl"
         :width="attachment.width"
         :height="attachment.height"

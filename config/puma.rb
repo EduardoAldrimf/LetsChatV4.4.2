@@ -36,3 +36,17 @@ preload_app!
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
+
+require 'redis'
+redis = Redis.new(url: ENV.fetch('REDIS_URL') { raise 'REDIS_URL environment variable is required' })
+redis.set('puma_shutdown', false)
+
+Thread.new do
+  loop do
+    if redis.get('puma_shutdown') == 'true'
+      Rails.logger.debug 'Shutdown signal received. Stopping Puma...'
+      Process.kill('TERM', Process.pid)
+    end
+    sleep 10 # Check every 10 seconds
+  end
+end

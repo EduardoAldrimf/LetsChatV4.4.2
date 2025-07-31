@@ -321,7 +321,7 @@ function openFileBrowser() {
 }
 
 function reloadState(content = props.modelValue) {
-  const unrefContent = unref(content);
+  const unrefContent = unref(content) || '';
   state = createState(
     unrefContent,
     props.placeholder,
@@ -335,7 +335,7 @@ function reloadState(content = props.modelValue) {
 }
 
 function addSignature() {
-  let content = props.modelValue;
+  let content = props.modelValue || '';
   // see if the content is empty, if it is before appending the signature
   // we need to add a paragraph node and move the cursor at the start of the editor
   const contentWasEmpty = isBodyEmpty(content);
@@ -350,7 +350,7 @@ function addSignature() {
 
 function removeSignature() {
   if (!props.signature) return;
-  let content = props.modelValue;
+  let content = props.modelValue || '';
   content = removeSignatureHelper(content, props.signature);
   // reload the state, ensuring that the editorView is updated
   reloadState(content);
@@ -656,7 +656,7 @@ watch(sendWithSignature, newValue => {
 onMounted(() => {
   // [VITE] state assignment was done in created before
   state = createState(
-    props.modelValue,
+    props.modelValue || '',
     props.placeholder,
     plugins.value,
     { onImageUpload: openFileBrowser },

@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Meklēt",
       "EMPTY_STATE": "Nav atrasts"
-    },
-    "CLOSE": "Aizvērt"
+    }
   }
 }

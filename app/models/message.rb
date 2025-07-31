@@ -166,6 +166,7 @@ class Message < ApplicationRecord
     data = {
       account: account.webhook_data,
       additional_attributes: additional_attributes,
+      status: status,
       content_attributes: content_attributes,
       content_type: content_type,
       content: outgoing_content,
@@ -220,6 +221,12 @@ class Message < ApplicationRecord
   def send_update_event
     Rails.configuration.dispatcher.dispatch(MESSAGE_UPDATED, Time.zone.now, message: self, performed_by: Current.executed_by,
                                                                             previous_changes: previous_changes)
+  end
+
+  def can_delete_message?
+    return false if !inbox.allow_agent_to_delete_message && !Current.user&.administrator?
+
+    true
   end
 
   private

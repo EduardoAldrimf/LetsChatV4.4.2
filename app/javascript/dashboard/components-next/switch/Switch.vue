@@ -31,7 +31,7 @@ const updateValue = () => {
       :class="
         modelValue
           ? 'translate-x-3 bg-n-background'
-          : 'translate-x-0 bg-n-background'
+          : 'translate-x-0 bg-n-brand'
       "
     />
   </button>

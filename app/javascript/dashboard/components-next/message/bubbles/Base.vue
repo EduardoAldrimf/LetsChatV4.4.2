@@ -94,7 +94,7 @@ const replyToPreview = computed(() => {
     <div
       v-if="inReplyTo"
       class="bg-n-alpha-black1 rounded-lg p-2 -mx-1 mb-2 cursor-pointer"
-      @click="scrollToMessage"
+      @click.stop="scrollToMessage"
     >
       <span class="line-clamp-2 break-all">
         {{ replyToPreview }}

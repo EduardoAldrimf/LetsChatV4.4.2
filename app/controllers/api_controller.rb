@@ -5,7 +5,8 @@ class ApiController < ApplicationController
     render json: { version: Chatwoot.config[:version],
                    timestamp: Time.now.utc.to_fs(:db),
                    queue_services: redis_status,
-                   data_services: postgres_status }
+                   data_services: postgres_status,
+                   develop: 'Comunity MEGA' }
   end
 
   private

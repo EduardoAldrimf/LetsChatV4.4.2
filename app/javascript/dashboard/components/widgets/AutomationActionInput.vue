@@ -176,6 +176,12 @@ export default {
             class="answer--text-input"
             :placeholder="$t('AUTOMATION.ACTION.URL_INPUT_PLACEHOLDER')"
           />
+          <input
+            v-else-if="inputType === 'number'"
+            v-model.number="action_params"
+            type="number"
+            class="answer--text-input"
+          />
           <AutomationActionFileInput
             v-if="inputType === 'attachment'"
             v-model="action_params"

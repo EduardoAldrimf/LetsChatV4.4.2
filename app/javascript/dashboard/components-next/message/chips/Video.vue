@@ -19,12 +19,14 @@ const { filteredCurrentChatAttachments } = useMessageContext();
 
 <template>
   <div
-    class="size-[72px] overflow-hidden contain-content rounded-xl cursor-pointer relative group"
+    class="overflow-hidden contain-content rounded-xl cursor-pointer relative group"
     @click="showGallery = true"
   >
     <video
       :src="attachment.dataUrl"
-      class="w-full h-full object-cover"
+      class="rounded-lg skip-context-menu max-w-80"
+      :width="attachment.width"
+      :height="attachment.height"
       muted
       playsInline
     />

@@ -11,7 +11,6 @@ class Public::Api::V1::Portals::ArticlesController < Public::Api::V1::Portals::B
     @articles = @articles.where(locale: permitted_params[:locale]) if permitted_params[:locale].present?
 
     @articles_count = @articles.count
-
     search_articles
     order_by_sort_param
     limit_results

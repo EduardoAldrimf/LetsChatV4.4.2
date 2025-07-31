@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, useTemplateRef, ref } from 'vue';
+import { computed, onMounted, useTemplateRef, ref, watch } from 'vue';
 import Icon from 'next/icon/Icon.vue';
 import { timeStampAppendedURL } from 'dashboard/helper/URLHelper';
 import { downloadFile } from '@chatwoot/utils';
@@ -27,8 +27,17 @@ const currentTime = ref(0);
 const duration = ref(0);
 const playbackSpeed = ref(1);
 
-const onLoadedMetadata = () => {
-  duration.value = audioPlayer.value?.duration;
+const updateDuration = () => {
+  const loadedDuration = audioPlayer.value?.duration;
+  duration.value = Number.isFinite(loadedDuration) ? loadedDuration : 0;
+};
+
+const loadMetadata = url => {
+  if (!audioPlayer.value) return;
+  audioPlayer.value.crossOrigin = 'anonymous';
+  audioPlayer.value.preload = 'metadata';
+  audioPlayer.value.src = url;
+  audioPlayer.value.load();
 };
 
 const playbackSpeedLabel = computed(() => {
@@ -39,12 +48,19 @@ const playbackSpeedLabel = computed(() => {
 // When the onLoadMetadata is called, so we need to set the duration
 // value when the component is mounted
 onMounted(() => {
-  duration.value = audioPlayer.value?.duration;
+  loadMetadata(timeStampURL.value);
+  updateDuration();
   audioPlayer.value.playbackRate = playbackSpeed.value;
 });
 
+watch(timeStampURL, newURL => {
+  duration.value = 0;
+  currentTime.value = 0;
+  loadMetadata(newURL);
+});
+
 const formatTime = time => {
-  if (!time || Number.isNaN(time)) return '00:00';
+  if (!Number.isFinite(time) || time <= 0) return '00:00';
   const minutes = Math.floor(time / 60);
   const seconds = Math.floor(time % 60);
   return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -99,14 +115,15 @@ const downloadAudio = async () => {
 <template>
   <audio
     ref="audioPlayer"
-    controls
     class="hidden"
-    @loadedmetadata="onLoadedMetadata"
+    controls
+    preload="metadata"
+    crossorigin="anonymous"
+    @loadedmetadata="updateDuration"
+    @durationchange="updateDuration"
     @timeupdate="onTimeUpdate"
     @ended="onEnd"
-  >
-    <source :src="timeStampURL" />
-  </audio>
+  />
   <div
     v-bind="$attrs"
     class="rounded-xl w-full gap-2 p-1.5 bg-n-alpha-white flex flex-col items-center border border-n-container shadow-[0px_2px_8px_0px_rgba(94,94,94,0.06)]"

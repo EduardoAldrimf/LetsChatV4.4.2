@@ -61,3 +61,4 @@ class Channel::Voice < ApplicationRecord
     end
   end
 end
+

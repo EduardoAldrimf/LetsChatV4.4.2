@@ -31,7 +31,7 @@ const shouldRenderComponent = computed(() => {
       :is="to ? 'router-link' : 'div'"
       :to="to"
       :title="label"
-      class="flex h-8 items-center gap-2 px-2 py-1 rounded-lg max-w-[9.438rem] hover:bg-gradient-to-r from-transparent via-n-slate-3/70 to-n-slate-3/70 group"
+      class="flex h-8 items-center gap-2 px-2 py-1 rounded-lg max-w-[15.438rem] hover:bg-gradient-to-r from-transparent via-n-slate-3/70 to-n-slate-3/70 group"
       :class="{
         'text-n-blue-text bg-n-alpha-2 active': active,
       }"
@@ -39,9 +39,9 @@ const shouldRenderComponent = computed(() => {
       <component
         :is="component"
         v-if="shouldRenderComponent"
-        :label
-        :icon
-        :active
+        :label="label"
+        :icon="icon"
+        :active="active"
       />
       <template v-else>
         <Icon v-if="icon" :icon="icon" class="size-4 inline-block" />

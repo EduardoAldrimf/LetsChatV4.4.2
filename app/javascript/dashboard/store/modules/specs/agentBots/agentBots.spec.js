@@ -42,7 +42,6 @@ describe('#actions', () => {
       const formDataArg = axios.post.mock.calls[0][1];
       expect(formDataArg instanceof FormData).toBe(true);
     });
-
     it('sends correct actions if API is error', async () => {
       axios.post.mockRejectedValue({ message: 'Incorrect header' });
       await expect(actions.create({ commit }, {})).rejects.toThrow(Error);
@@ -74,7 +73,6 @@ describe('#actions', () => {
       const formDataArg = axios.patch.mock.calls[0][1];
       expect(formDataArg instanceof FormData).toBe(true);
     });
-
     it('sends correct actions if API is error', async () => {
       axios.patch.mockRejectedValue({ message: 'Incorrect header' });
       await expect(
@@ -86,6 +84,7 @@ describe('#actions', () => {
       ]);
     });
   });
+
   describe('#delete', () => {
     it('sends correct actions if API is success', async () => {
       axios.delete.mockResolvedValue({ data: agentBotRecords[0] });

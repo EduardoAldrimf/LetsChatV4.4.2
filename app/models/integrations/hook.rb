@@ -41,6 +41,18 @@ class Integrations::Hook < ApplicationRecord
   scope :account_hooks, -> { where(hook_type: 'account') }
   scope :inbox_hooks, -> { where(hook_type: 'inbox') }
 
+  # Agregamos el método keys para que sea compatible con código que trata al objeto como un hash
+  def keys
+    settings.try(:keys) || []
+  end
+
+  # Método para permitir acceso a los settings como si fuera un hash
+  def [](key)
+    return settings[key.to_s] if settings.is_a?(Hash) && key.present?
+
+    nil
+  end
+
   def app
     @app ||= Integrations::App.find(id: app_id)
   end

@@ -4,14 +4,12 @@
       "ALL": "Kaikki",
       "CONTACTS": "Yhteystiedot",
       "CONVERSATIONS": "Keskustelut",
-      "MESSAGES": "Messages",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Messages"
     },
     "SECTION": {
       "CONTACTS": "Yhteystiedot",
       "CONVERSATIONS": "Keskustelut",
-      "MESSAGES": "Messages",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Messages"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

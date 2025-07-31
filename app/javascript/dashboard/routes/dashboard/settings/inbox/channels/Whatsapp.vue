@@ -7,6 +7,7 @@ import Twilio from './Twilio.vue';
 import ThreeSixtyDialogWhatsapp from './360DialogWhatsapp.vue';
 import CloudWhatsapp from './CloudWhatsapp.vue';
 import WhatsappEmbeddedSignup from './WhatsappEmbeddedSignup.vue';
+import Evolution from './Evolution.vue';
 import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
 const route = useRoute();
@@ -20,6 +21,7 @@ const PROVIDER_TYPES = {
   WHATSAPP_CLOUD: 'whatsapp_cloud',
   WHATSAPP_EMBEDDED: 'whatsapp_embedded',
   THREE_SIXTY_DIALOG: '360dialog',
+  EVOLUTION: 'evolution',
 };
 
 const hasWhatsappAppId = computed(() => {
@@ -37,26 +39,48 @@ const isWhatsappEmbeddedSignupEnabled = computed(() => {
   );
 });
 
+const isWhatsappEvolutionEnabled = computed(() => {
+  const accountId = route.params.accountId;
+  return store.getters['accounts/isFeatureEnabledonAccount'](
+    accountId,
+    FEATURE_FLAGS.WHATSAPP_EVOLUTION
+  );
+});
+
 const selectedProvider = computed(() => route.query.provider);
 
 const showProviderSelection = computed(() => !selectedProvider.value);
 
 const showConfiguration = computed(() => Boolean(selectedProvider.value));
 
-const availableProviders = computed(() => [
-  {
-    value: PROVIDER_TYPES.WHATSAPP,
-    label: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.WHATSAPP_CLOUD'),
-    description: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.WHATSAPP_CLOUD_DESC'),
-    icon: '/assets/images/dashboard/channels/whatsapp.png',
-  },
-  {
-    value: PROVIDER_TYPES.TWILIO,
-    label: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.TWILIO'),
-    description: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.TWILIO_DESC'),
-    icon: '/assets/images/dashboard/channels/twilio.png',
-  },
-]);
+const availableProviders = computed(() => {
+  const providers = [
+    {
+      value: PROVIDER_TYPES.WHATSAPP,
+      label: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.WHATSAPP_CLOUD'),
+      description: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.WHATSAPP_CLOUD_DESC'),
+      icon: '/assets/images/dashboard/channels/whatsapp.png',
+    },
+    {
+      value: PROVIDER_TYPES.TWILIO,
+      label: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.TWILIO'),
+      description: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.TWILIO_DESC'),
+      icon: '/assets/images/dashboard/channels/twilio.png',
+    },
+  ];
+
+  if (isWhatsappEvolutionEnabled.value) {
+    providers.push({
+      value: PROVIDER_TYPES.EVOLUTION,
+      label: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.EVOLUTION'),
+      description: t('INBOX_MGMT.ADD.WHATSAPP.PROVIDERS.EVOLUTION_DESC'),
+      icon: '/assets/images/dashboard/channels/whatsapp.png',
+      isBeta: true,
+    });
+  }
+
+  return providers;
+});
 
 const selectProvider = providerValue => {
   router.push({
@@ -109,9 +133,15 @@ const shouldShowCloudWhatsapp = provider => {
         <div
           v-for="provider in availableProviders"
           :key="provider.value"
-          class="gap-6 px-5 py-6 w-96 rounded-2xl border transition-all duration-200 cursor-pointer border-n-weak hover:bg-n-slate-3"
+          class="relative gap-6 px-5 py-6 w-96 rounded-2xl border transition-all duration-200 cursor-pointer border-n-weak hover:bg-n-slate-3"
           @click="selectProvider(provider.value)"
         >
+          <span
+            v-if="provider.isBeta"
+            class="absolute top-2 right-2 px-2 py-0.5 text-xs font-medium rounded bg-green-600 text-white"
+          >
+            {{ $t('SIDEBAR.BETA') }}
+          </span>
           <div class="flex justify-start mb-5">
             <div
               class="flex justify-center items-center rounded-full size-10 bg-n-alpha-2"
@@ -149,6 +179,7 @@ const shouldShowCloudWhatsapp = provider => {
         <ThreeSixtyDialogWhatsapp
           v-else-if="selectedProvider === PROVIDER_TYPES.THREE_SIXTY_DIALOG"
         />
+        <Evolution v-else-if="selectedProvider === PROVIDER_TYPES.EVOLUTION" />
         <CloudWhatsapp v-else />
       </div>
     </div>

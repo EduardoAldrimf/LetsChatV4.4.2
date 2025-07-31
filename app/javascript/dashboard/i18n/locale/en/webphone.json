@@ -1,0 +1,20 @@
+{
+  "WEBPHONE": {
+    "ACCEPT_ELSEWHERE": "Call accepted elsewhere",
+    "REJECT_ELSEWHERE": "Call rejected elsewhere",
+    "TERMINATE": "Call ended",
+    "CONNECT_CALLING": "Connecting...",
+    "CALLING": "Calling...",
+    "MUTE": "Mute",
+    "UNMUTE": "Unmute",
+    "TURN_ON_VIDEO": "Turn on video",
+    "NUMPAD": "Dial pad",
+    "TRANSFER": "Transfer",
+    "UNKNOWN": "Unknown",
+    "CONNECTION_FAILED": "Connection failed",
+    "NO_AVAILABLE_INSTANCES": "No available instances",
+    "NUMBER_NOT_FOUND": "Number not found",
+    "DAILY_LIMIT_REACHED": "Daily limit reached",
+    "LINE_BUSY_TRY_AGAIN": "Line busy, try again"
+  }
+}

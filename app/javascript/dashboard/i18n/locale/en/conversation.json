@@ -268,6 +268,16 @@
       }
     }
   },
+  "FORWARD_MODAL": {
+    "TITLE": "Share message",
+    "DESC": "Share this message with your contacts",
+    "SEARCH_LABEL": "Search for a contact",
+    "SEARCH_PLACEHOLDER": "Search by name or phone",
+    "CONTACT": "Contact",
+    "PHONE": "Phone",
+    "SUBMIT": "Forward",
+    "PROCESSING": "Forwarding message..."
+  },
   "ONBOARDING": {
     "TITLE": "Hey 👋, Welcome to {installationName}!",
     "DESCRIPTION": "Thanks for signing up. We want you to get the most out of {installationName}. Here are a few things you can do in {installationName} to make the experience delightful.",
@@ -313,12 +323,13 @@
       "PREVIOUS_CONVERSATION": "Previous Conversations",
       "MACROS": "Macros",
       "LINEAR_ISSUES": "Linked Linear Issues",
-      "SHOPIFY_ORDERS": "Shopify Orders"
-    },
-    "SHOPIFY": {
-      "ORDER_ID": "Order #{id}",
-      "ERROR": "Error loading orders",
-      "NO_SHOPIFY_ORDERS": "No orders found",
+      "SHOPIFY_ORDERS": "Shopify Orders",
+      "WOOCOMMERCE_ORDERS": "WooCommerce Orders"
+      },
+      "SHOPIFY": {
+        "ORDER_ID": "Order #{id}",
+        "ERROR": "Error loading orders",
+        "NO_SHOPIFY_ORDERS": "No orders found",
       "FINANCIAL_STATUS": {
         "PENDING": "Pending",
         "AUTHORIZED": "Authorized",
@@ -332,6 +343,20 @@
         "FULFILLED": "Fulfilled",
         "PARTIALLY_FULFILLED": "Partially Fulfilled",
         "UNFULFILLED": "Unfulfilled"
+      }
+    },
+    "WOOCOMMERCE": {
+      "ORDER_ID": "Order #{id}",
+      "ERROR": "Error loading orders",
+      "NO_WOOCOMMERCE_ORDERS": "No orders found",
+      "PAYMENT_STATUS": {
+        "PENDING": "Pending",
+        "PROCESSING": "Processing",
+        "ON-HOLD": "On hold",
+        "COMPLETED": "Completed",
+        "CANCELLED": "Cancelled",
+        "REFUNDED": "Refunded",
+        "FAILED": "Failed"
       }
     }
   },

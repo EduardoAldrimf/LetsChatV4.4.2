@@ -77,7 +77,7 @@ onMounted(() => {
             @submit="handleSubmit"
           />
         </div>
-        <div class="w-[400px] hidden lg:block h-full">
+        <div class="w-[400px] hidden lg:block h-full bg-n-solid-2 rounded-lg">
           <AssistantPlayground :assistant-id="Number(assistantId)" />
         </div>
       </div>

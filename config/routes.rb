@@ -109,6 +109,7 @@ Rails.application.routes.draw do
               resources :messages, only: [:index, :create, :destroy, :update] do
                 member do
                   post :translate
+                  post :forward
                   post :retry
                 end
               end
@@ -237,6 +238,10 @@ Rails.application.routes.draw do
             resource :authorization, only: [:create]
           end
 
+          namespace :evolution do
+            resource :authorization, only: [:create]
+          end
+
           resources :webhooks, only: [:index, :create, :update, :destroy]
           namespace :integrations do
             resources :apps, only: [:index, :show]
@@ -259,6 +264,11 @@ Rails.application.routes.draw do
             resource :shopify, controller: 'shopify', only: [:destroy] do
               collection do
                 post :auth
+                get :orders
+              end
+            end
+            resource :woocommerce, controller: 'woocommerce', only: [:destroy] do
+              collection do
                 get :orders
               end
             end
@@ -484,6 +494,7 @@ Rails.application.routes.draw do
   post 'webhooks/sms/:phone_number', to: 'webhooks/sms#process_payload'
   get 'webhooks/whatsapp/:phone_number', to: 'webhooks/whatsapp#verify'
   post 'webhooks/whatsapp/:phone_number', to: 'webhooks/whatsapp#process_payload'
+  post 'webhooks/whatsapp', to: 'webhooks/whatsapp#process_payload'
   get 'webhooks/instagram', to: 'webhooks/instagram#verify'
   post 'webhooks/instagram', to: 'webhooks/instagram#events'
 
@@ -497,6 +508,10 @@ Rails.application.routes.draw do
 
   namespace :shopify do
     resource :callback, only: [:show]
+  end
+
+  namespace :woocommerce do
+    resource :callback, only: [:create]
   end
 
   namespace :twilio do

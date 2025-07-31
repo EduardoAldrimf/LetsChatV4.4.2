@@ -76,12 +76,7 @@
       "ACCESS_TOKEN": {
         "TITLE": "엑세스 토큰",
         "NOTE": "API 기반 통합을 구축하는 경우 이 토큰을 사용할 수 있음",
-        "COPY": "복사",
-        "RESET": "Reset",
-        "CONFIRM_RESET": "Are you sure?",
-        "CONFIRM_HINT": "Click again to confirm",
-        "RESET_SUCCESS": "Access token regenerated successfully",
-        "RESET_ERROR": "Unable to regenerate access token. Please try again"
+        "COPY": "복사"
       },
       "AUDIO_NOTIFICATIONS_SECTION": {
         "TITLE": "Audio Alerts",
@@ -190,8 +185,7 @@
           "OFFLINE": "오프라인"
         },
         "SET_AVAILABILITY_SUCCESS": "Availability has been set successfully",
-        "SET_AVAILABILITY_ERROR": "Couldn't set availability, please try again",
-        "IMPERSONATING_ERROR": "Cannot change availability while impersonating a user"
+        "SET_AVAILABILITY_ERROR": "Couldn't set availability, please try again"
       },
       "EMAIL": {
         "LABEL": "이메일 주소",
@@ -286,7 +280,6 @@
     "REPORTS": "보고서",
     "SETTINGS": "설정",
     "CONTACTS": "연락처",
-    "ACTIVE": "Active",
     "CAPTAIN": "Captain",
     "CAPTAIN_ASSISTANTS": "Assistants",
     "CAPTAIN_DOCUMENTS": "Documents",

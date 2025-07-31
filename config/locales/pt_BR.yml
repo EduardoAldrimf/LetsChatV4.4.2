@@ -91,7 +91,7 @@ pt_BR:
       conversations_count: Nº de Conversas
       avg_first_response_time: Tempo médio de primeira resposta
       avg_resolution_time: Tempo médio de resolução
-      avg_reply_time: Tempo médio de resposta
+      avg_reply_time: Avg reply time
       resolution_count: Contagem de Resolução
     team_csv:
       team_name: Nome do Time
@@ -141,7 +141,7 @@ pt_BR:
       instagram_deleted_story_content: Este Story não está mais disponível.
       deleted: Esta mensagem foi excluída
       whatsapp:
-        list_button_label: 'Escolha um item'
+        list_button_label: 'Choose an item'
       delivery_status:
         error_code: 'Código de erro: %{error_code}'
     activity:
@@ -177,13 +177,15 @@ pt_BR:
         added: '%{user_name} adicionou política de SLA %{sla_name}'
         removed: '%{user_name} removeu a política de SLA %{sla_name}'
       linear:
-        issue_created: 'Problema linear %{issue_id} foi criado por %{user_name}'
-        issue_linked: 'Problema linear %{issue_id} foi vinculado por %{user_name}'
-        issue_unlinked: 'Problema linear %{issue_id} foi desvinculado por %{user_name}'
+        issue_created: 'Linear issue %{issue_id} was created by %{user_name}'
+        issue_linked: 'Linear issue %{issue_id} was linked by %{user_name}'
+        issue_unlinked: 'Linear issue %{issue_id} was unlinked by %{user_name}'
+      woocommerce:
+        order_updated: 'Status do pedido %{order_id} atualizado para %{status}'
       csat:
         not_sent_due_to_messaging_window: 'Pesquisa CSAT não foi enviada devido a restrições de envio de mensagens'
       auto_resolve:
-        not_sent_due_to_messaging_window: 'Auto-resolver mensagem não enviada devido a restrições de envio de mensagens'
+        not_sent_due_to_messaging_window: 'Mensagem de auto-resolução não enviada devido a restrições de mensagens de saída'
       muted: '%{user_name} silenciou a conversa'
       unmuted: '%{user_name} reativou a conversa'
       auto_resolution_message: 'Resolvendo a conversa dado que está inativa por um tempo. Por favor, inicie uma nova conversa se precisar de mais ajuda.'
@@ -205,6 +207,8 @@ pt_BR:
           reply_with_inbox_name: '%{inbox_name} <%{from_email}>'
       email_subject: 'Novas mensagens nesta conversa'
       transcript_subject: 'Transcrição da conversa'
+    history:
+      separator: 'Conversa #%{id} — %{date}'
     survey:
       response: 'Por favor, classifique esta conversa, %{link}'
   contacts:
@@ -245,18 +249,22 @@ pt_BR:
       description: 'Crie issues em Linear diretamente da sua janela de conversa. Alternativamente, vincule as issues lineares existentes para um processo de rastreamento de problemas mais simples e eficiente.'
     notion:
       name: 'Notion'
-      short_description: 'Integrate databases, documents and pages directly with Captain.'
-      description: 'Connect your Notion workspace to enable Captain to access and generate intelligent responses using content from your databases, documents, and pages to provide more contextual customer support.'
+      short_description: 'Integre bancos de dados, documentos e páginas diretamente com o Captain.'
+      description: 'Conecte seu workspace do Notion para permitir que o Captain acesse e gere respostas inteligentes usando o conteúdo de seus bancos de dados, documentos e páginas para fornecer um suporte ao cliente mais contextual.'
     shopify:
       name: 'Shopify'
       short_description: 'Acessar detalhes do pedido e dados de clientes da sua loja Shopify.'
       description: 'Conecte sua loja Shopify para acessar detalhes de pedidos, informações de clientes e dados de produtos diretamente em suas conversas e ajudar sua equipe de suporte a fornecer um atendimento mais rápido e contextual aos seus clientes.'
+    woocommerce:
+      name: 'WooCommerce'
+      short_description: 'Veja pedidos recentes de sua loja WooCommerce.'
+      description: 'Conecte sua loja WooCommerce fornecendo a URL da loja e as credenciais da API. Depois de conectado, você poderá visualizar rapidamente os pedidos recentes relacionados a um contato na barra lateral da conversa.'
     leadsquared:
       name: 'LeadSquared'
       short_description: 'Sincronize seus contatos e conversas com LeadSquared CRM.'
       description: 'Sincronize seus contatos e conversas com LeadSquared CRM. Essa integração cria automaticamente leads em LeadSquared quando novos contatos são adicionados, e registra a atividade de conversação para fornecer à sua equipe de vendas um contexto completo.'
   captain:
-    copilot_message_required: A mensagem é obrigatória
+    copilot_message_required: 'Mensagem obrigatória'
     copilot_error: 'Conecte com um assistente a esta caixa de entrada para usar Copilot'
     copilot_limit: 'Você está sem créditos de Copilot. Pode comprar mais créditos na seção de faturamento.'
     copilot:
@@ -289,7 +297,7 @@ pt_BR:
       made_with: Criado com
     header:
       go_to_homepage: Site
-      visit_website: Visite o site
+      visit_website: Visit website
       appearance:
         system: Sistema
         light: Claro

@@ -4,14 +4,12 @@
       "ALL": "Tous",
       "CONTACTS": "Contacts",
       "CONVERSATIONS": "Conversations",
-      "MESSAGES": "Messages",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Messages"
     },
     "SECTION": {
       "CONTACTS": "Contacts",
       "CONVERSATIONS": "Conversations",
-      "MESSAGES": "Messages",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Messages"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

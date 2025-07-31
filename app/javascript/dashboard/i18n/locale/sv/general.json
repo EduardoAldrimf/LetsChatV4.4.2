@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Sök",
       "EMPTY_STATE": "Inga resultat hittades"
-    },
-    "CLOSE": "Stäng"
+    }
   }
 }

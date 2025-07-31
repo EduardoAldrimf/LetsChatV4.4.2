@@ -99,13 +99,6 @@
       "CHANGE_PRIORITY": "Змінити пріоритет",
       "ADD_PRIVATE_NOTE": "Add a Private Note",
       "SEND_WEBHOOK_EVENT": "Send Webhook Event"
-    },
-    "PRIORITY_TYPES": {
-      "NONE": "Нiчого",
-      "LOW": "Низький",
-      "MEDIUM": "Середній",
-      "HIGH": "Високий",
-      "URGENT": "Терміновий"
     }
   }
 }

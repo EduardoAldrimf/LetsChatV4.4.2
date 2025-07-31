@@ -47,9 +47,9 @@
 ## Project-Specific
 
 - **Translations**:
-  - Only update `en.yml` and `en.json`
+  - Only update `en.yml`, `es.yml`, `pt_BR.yml` and `en.json`, `es.json`, `pt_BR.json`
   - Other languages are handled by the community
-  - Backend i18n → `en.yml`, Frontend i18n → `en.json`
+  - Backend i18n → `en.yml`, `es.yml`, `pt_BR.yml`, Frontend i18n → `en.json`, `es.json`, `pt_BR.json`
 - **Frontend**:
   - Use `components-next/` for message bubbles (the rest is being deprecated)
 

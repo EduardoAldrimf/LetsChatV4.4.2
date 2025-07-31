@@ -11,7 +11,49 @@ import {
 } from './helpers/actionHelpers';
 import messageReadActions from './actions/messageReadActions';
 import messageTranslateActions from './actions/messageTranslateActions';
+import messageForwardActions from './actions/messageForwardActions';
 import * as Sentry from '@sentry/vue';
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
+import wootConstants from 'dashboard/constants/globals';
+import store from '../../../store';
+
+// Función para verificar si necesitamos restringir el acceso a conversaciones
+// basado en los feature flags HIDE_ALL_CHATS_FOR_AGENT o HIDE_UNASSIGNED_FOR_AGENT
+const shouldRestrictConversationsToAssignee = () => {
+  const currentAccountId = store.getters.getCurrentAccountId;
+  const currentUser = store.getters.getCurrentUser;
+  const isFeatureEnabled = store.getters['accounts/isFeatureEnabledonAccount'];
+
+  // Si el usuario es administrador, no aplicamos restricciones
+  if (currentUser.role === 'administrator') {
+    return false;
+  }
+
+  // Verificar si alguno de los feature flags está habilitado
+  const hideAllChats = isFeatureEnabled(
+    currentAccountId,
+    FEATURE_FLAGS.HIDE_ALL_CHATS_FOR_AGENT
+  );
+
+  const hideUnassigned = isFeatureEnabled(
+    currentAccountId,
+    FEATURE_FLAGS.HIDE_UNASSIGNED_FOR_AGENT
+  );
+
+  return hideAllChats || hideUnassigned;
+};
+
+// Función para modificar los parámetros de búsqueda para restringir a conversaciones asignadas
+const applyAssigneeRestrictionIfNeeded = params => {
+  if (shouldRestrictConversationsToAssignee()) {
+    // Forzar a que el tipo de asignación sea "me" (asignadas a mí)
+    return {
+      ...params,
+      assigneeType: wootConstants.ASSIGNEE_TYPE.ME,
+    };
+  }
+  return params;
+};
 
 export const hasMessageFailedWithExternalError = pendingMessage => {
   // This helper is used to check if the message has failed with an external error.
@@ -40,7 +82,10 @@ const actions = {
   fetchAllConversations: async ({ commit, state, dispatch }) => {
     commit(types.SET_LIST_LOADING_STATUS);
     try {
-      const params = state.conversationFilters;
+      // Aplicar restricción si los feature flags están habilitados
+      const params = applyAssigneeRestrictionIfNeeded(
+        state.conversationFilters
+      );
       const {
         data: { data },
       } = await ConversationApi.get(params);
@@ -58,10 +103,12 @@ const actions = {
   fetchFilteredConversations: async ({ commit, dispatch }, params) => {
     commit(types.SET_LIST_LOADING_STATUS);
     try {
-      const { data } = await ConversationApi.filter(params);
+      // Aplicar restricción si los feature flags están habilitados
+      const restrictedParams = applyAssigneeRestrictionIfNeeded(params);
+      const { data } = await ConversationApi.filter(restrictedParams);
       buildConversationList(
         { commit, dispatch },
-        params,
+        restrictedParams,
         data,
         'appliedFilters'
       );
@@ -510,6 +557,7 @@ const actions = {
 
   ...messageReadActions,
   ...messageTranslateActions,
+  ...messageForwardActions,
 };
 
 export default actions;

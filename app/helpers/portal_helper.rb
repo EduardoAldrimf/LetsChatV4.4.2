@@ -26,12 +26,12 @@ module PortalHelper
   end
 
   def generate_gradient_to_bottom(theme)
-    base_color = theme == 'dark' ? '#151718' : 'white'
+    base_color = theme == 'dark' ? '#121b22' : 'white'
     "linear-gradient(to bottom, transparent, #{base_color})"
   end
 
   def generate_portal_hover_color(portal_color, theme)
-    base_color = theme == 'dark' ? '#1B1B1B' : '#F9F9F9'
+    base_color = theme == 'dark' ? '#121b22' : '#F9F9F9'
     "color-mix(in srgb, #{portal_color} 5%, #{base_color})"
   end
 

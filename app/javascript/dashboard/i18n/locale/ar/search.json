@@ -4,14 +4,12 @@
       "ALL": "الكل",
       "CONTACTS": "جهات الاتصال",
       "CONVERSATIONS": "المحادثات",
-      "MESSAGES": "الرسائل",
-      "ARTICLES": "Articles"
+      "MESSAGES": "الرسائل"
     },
     "SECTION": {
       "CONTACTS": "جهات الاتصال",
       "CONVERSATIONS": "المحادثات",
-      "MESSAGES": "الرسائل",
-      "ARTICLES": "Articles"
+      "MESSAGES": "الرسائل"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

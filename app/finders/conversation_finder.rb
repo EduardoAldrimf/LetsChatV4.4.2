@@ -88,10 +88,7 @@ class ConversationFinder
 
   def find_conversation_by_inbox
     @conversations = current_account.conversations
-
-    return unless params[:inbox_id]
-
-    @conversations = @conversations.where(inbox_id: @inbox_ids)
+    @conversations = @conversations.where(inbox_id: @inbox_ids) unless params[:inbox_id].blank? && @is_admin
   end
 
   def find_all_conversations

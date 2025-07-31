@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "Search",
       "EMPTY_STATE": "Tiada dijumpa"
-    },
-    "CLOSE": "Close"
+    }
   }
 }

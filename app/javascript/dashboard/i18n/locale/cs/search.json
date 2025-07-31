@@ -4,14 +4,12 @@
       "ALL": "Vše",
       "CONTACTS": "Kontakty",
       "CONVERSATIONS": "Konverzace",
-      "MESSAGES": "Zprávy",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Zprávy"
     },
     "SECTION": {
       "CONTACTS": "Kontakty",
       "CONVERSATIONS": "Konverzace",
-      "MESSAGES": "Zprávy",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Zprávy"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

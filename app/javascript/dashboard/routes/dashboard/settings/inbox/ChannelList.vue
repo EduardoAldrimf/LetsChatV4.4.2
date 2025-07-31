@@ -11,14 +11,12 @@ export default {
     PageHeader,
   },
   mixins: [globalConfigMixin],
-  data() {
-    return {
-      enabledFeatures: {},
-    };
-  },
   computed: {
     account() {
       return this.$store.getters['accounts/getAccount'](this.accountId);
+    },
+    enabledFeatures() {
+      return this.account.features || {};
     },
     channelList() {
       const { apiChannelName, apiChannelThumbnail } = this.globalConfig;
@@ -44,13 +42,7 @@ export default {
       globalConfig: 'globalConfig/get',
     }),
   },
-  mounted() {
-    this.initializeEnabledFeatures();
-  },
   methods: {
-    async initializeEnabledFeatures() {
-      this.enabledFeatures = this.account.features;
-    },
     initChannelAuth(channel) {
       const params = {
         sub_page: channel,

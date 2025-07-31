@@ -34,6 +34,8 @@ class ActionCableConnector extends BaseActionCableConnector {
       'conversation.updated': this.onConversationUpdated,
       'account.cache_invalidated': this.onCacheInvalidate,
       'copilot.message.created': this.onCopilotMessageCreated,
+      'whatsapp.qrcode_updated': this.onWhatsappQrCodeUpdated,
+      'whatsapp.connection_update': this.onWhatsappConnectionUpdate,
     };
   }
 
@@ -188,6 +190,16 @@ class ActionCableConnector extends BaseActionCableConnector {
 
   onNotificationUpdated = data => {
     this.app.$store.dispatch('notifications/updateNotification', data);
+  };
+
+  // eslint-disable-next-line class-methods-use-this
+  onWhatsappQrCodeUpdated = data => {
+    emitter.emit(BUS_EVENTS.WHATSAPP_QRCODE_UPDATED, data);
+  };
+
+  // eslint-disable-next-line class-methods-use-this
+  onWhatsappConnectionUpdate = data => {
+    emitter.emit(BUS_EVENTS.WHATSAPP_CONNECTION_UPDATE, data);
   };
 
   onCopilotMessageCreated = data => {

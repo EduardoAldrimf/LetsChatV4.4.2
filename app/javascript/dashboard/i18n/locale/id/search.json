@@ -4,14 +4,12 @@
       "ALL": "Semua",
       "CONTACTS": "Kontak",
       "CONVERSATIONS": "Percakapan",
-      "MESSAGES": "Pesan",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Pesan"
     },
     "SECTION": {
       "CONTACTS": "Kontak",
       "CONVERSATIONS": "Percakapan",
-      "MESSAGES": "Pesan",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Pesan"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

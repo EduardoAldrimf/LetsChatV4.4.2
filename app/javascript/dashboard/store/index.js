@@ -41,6 +41,7 @@ import portals from './modules/helpCenterPortals';
 import reports from './modules/reports';
 import sla from './modules/sla';
 import slaReports from './modules/SLAReports';
+import webphone from './modules/webphone';
 import summaryReports from './modules/summaryReports';
 import teamMembers from './modules/teamMembers';
 import teams from './modules/teams';
@@ -99,6 +100,7 @@ export default createStore({
     reports,
     sla,
     slaReports,
+    webphone,
     summaryReports,
     teamMembers,
     teams,

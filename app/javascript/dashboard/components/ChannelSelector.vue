@@ -31,7 +31,7 @@ export default {
       class="absolute inset-0 flex items-center justify-center backdrop-blur-[2px] rounded-md bg-gradient-to-br from-n-background/90 via-n-background/70 to-n-background/95"
     >
       <span class="text-n-slate-12 font-medium text-base">
-        {{ $t('CHANNEL_SELECTOR.COMING_SOON') }} 🚀
+        {{ $t('CHANNEL_SELECTOR.COMING_SOON') }}
       </span>
     </div>
   </button>

@@ -194,6 +194,8 @@ en:
         issue_created: 'Linear issue %{issue_id} was created by %{user_name}'
         issue_linked: 'Linear issue %{issue_id} was linked by %{user_name}'
         issue_unlinked: 'Linear issue %{issue_id} was unlinked by %{user_name}'
+      woocommerce:
+        order_updated: 'Order %{order_id} status updated to %{status}'
       csat:
         not_sent_due_to_messaging_window: 'CSAT survey not sent due to outgoing message restrictions'
       auto_resolve:
@@ -219,6 +221,8 @@ en:
           reply_with_inbox_name: '%{inbox_name} <%{from_email}>'
       email_subject: 'New messages on this conversation'
       transcript_subject: 'Conversation Transcript'
+    history:
+      separator: 'Conversation #%{id} — %{date}'
     survey:
       response: 'Please rate this conversation, %{link}'
   contacts:
@@ -265,6 +269,10 @@ en:
       name: 'Shopify'
       short_description: 'Access order details and customer data from your Shopify store.'
       description: 'Connect your Shopify store to access order details, customer information, and product data directly within your conversations and helps your support team provide faster, more contextual assistance to your customers.'
+    woocommerce:
+      name: 'WooCommerce'
+      short_description: 'View recent orders from your WooCommerce store.'
+      description: 'Connect your WooCommerce store by providing the store URL and API credentials. Once connected, you can quickly view recent orders related to a contact from the conversation sidebar.'
     leadsquared:
       name: 'LeadSquared'
       short_description: 'Sync your contacts and conversations with LeadSquared CRM.'

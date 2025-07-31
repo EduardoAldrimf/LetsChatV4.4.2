@@ -501,7 +501,7 @@ provideMessageContext({
         v-tooltip.left-end="avatarTooltip"
         class="[grid-area:avatar] flex items-end"
       >
-        <Avatar v-bind="avatarInfo" :size="24" />
+        <Avatar v-bind="avatarInfo" :size="32" />
       </div>
       <div
         class="[grid-area:bubble] flex"
@@ -523,7 +523,7 @@ provideMessageContext({
     </div>
     <div v-if="shouldShowContextMenu" class="context-menu-wrap">
       <ContextMenu
-        v-if="isBubble"
+        v-if="isBubble && !isMessageDeleted"
         :context-menu-position="contextMenuPosition"
         :is-open="showContextMenu"
         :enabled-options="contextMenuEnabledOptions"

@@ -1,5 +1,4 @@
 require 'google/cloud/translate/v3'
-
 class Integrations::GoogleTranslate::ProcessorService
   pattr_initialize [:message!, :target_language!]
 

@@ -208,6 +208,47 @@ shopify:
   hook_type: account
   allow_multiple_hooks: false
 
+woocommerce:
+  id: woocommerce
+  logo: woocommerce.png
+  i18n_key: woocommerce
+  hook_type: account
+  allow_multiple_hooks: false
+  settings_json_schema:
+    {
+      'type': 'object',
+      'properties':
+        {
+          'store_url': { 'type': 'string' },
+          'consumer_key': { 'type': 'string' },
+          'consumer_secret': { 'type': 'string' },
+        },
+      'required': ['store_url', 'consumer_key', 'consumer_secret'],
+      'additionalProperties': false,
+    }
+  settings_form_schema:
+    [
+      {
+        'label': 'Store URL',
+        'type': 'text',
+        'name': 'store_url',
+        'validation': 'required',
+      },
+      {
+        'label': 'Consumer Key',
+        'type': 'text',
+        'name': 'consumer_key',
+        'validation': 'required',
+      },
+      {
+        'label': 'Consumer Secret',
+        'type': 'text',
+        'name': 'consumer_secret',
+        'validation': 'required',
+      },
+    ]
+  visible_properties: ['store_url']
+
 leadsquared:
   id: leadsquared
   feature_flag: crm_integration

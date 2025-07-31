@@ -11,7 +11,6 @@ const props = defineProps({
 const emit = defineEmits(['onCopy', 'onReset']);
 
 const inputType = ref('password');
-
 const toggleMasked = () => {
   inputType.value = inputType.value === 'password' ? 'text' : 'password';
 };

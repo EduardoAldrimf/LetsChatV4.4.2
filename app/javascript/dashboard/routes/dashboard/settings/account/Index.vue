@@ -86,14 +86,17 @@ export default {
     isUpdating() {
       return this.uiFlags.isUpdating;
     },
+
     featureInboundEmailEnabled() {
       return !!this.features?.inbound_emails;
     },
+
     featureCustomReplyDomainEnabled() {
       return (
         this.featureInboundEmailEnabled && !!this.features.custom_reply_domain
       );
     },
+
     featureCustomReplyEmailEnabled() {
       return (
         this.featureInboundEmailEnabled && !!this.features.custom_reply_email
@@ -192,6 +195,7 @@ export default {
                 v-for="lang in languagesSortedByCode"
                 :key="lang.iso_639_1_code"
                 :value="lang.iso_639_1_code"
+                class="dark:bg-n-solid-1 dark:text-white"
               >
                 {{ lang.name }}
               </option>

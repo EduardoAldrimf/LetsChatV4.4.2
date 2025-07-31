@@ -21,7 +21,13 @@ module Whatsapp::IncomingMessageServiceHelpers
   end
 
   def message_type
-    @processed_params[:messages].first[:type]
+    if evolution_api?
+      # Evolution API structure: data.messageType
+      @processed_params[:data][:messageType]
+    else
+      # Baileys structure: messages.first.type
+      @processed_params[:messages].first[:type]
+    end
   end
 
   def message_content(message)
@@ -64,6 +70,15 @@ module Whatsapp::IncomingMessageServiceHelpers
     normalised_number
   end
 
+  def contact_phones(contact)
+    phones = contact[:phones]
+    if phones.blank? && contact[:vcard].present?
+      numbers = contact[:vcard].to_s.scan(/TEL[^:]*:([^\n]+)/i).flatten
+      phones = numbers.map { |number| { phone: number.strip } }
+    end
+    phones
+  end
+
   def processed_waid(waid)
     # in case of Brazil, we need to do additional processing
     # https://github.com/chatwoot/chatwoot/issues/5840
@@ -88,7 +103,17 @@ module Whatsapp::IncomingMessageServiceHelpers
   end
 
   def process_in_reply_to(message)
-    @in_reply_to_external_id = message['context']&.[]('id')
+    @in_reply_to_external_id = extract_reply_to_id(message)
+  end
+
+  def extract_reply_to_id(message)
+    message['context']&.[]('id') ||
+      message.dig('quoted', 'key', 'id') ||
+      message.dig('quotedMsgId') ||
+      message.dig('contextInfo', 'stanzaId') ||
+      message.dig('contextInfo', 'quotedMessage', 'key', 'id') ||
+      message.dig('message', 'extendedTextMessage', 'contextInfo', 'stanzaId') ||
+      message.dig('message', 'extendedTextMessage', 'contextInfo', 'quotedMessage', 'key', 'id')
   end
 
   def find_message_by_source_id(source_id)
@@ -98,19 +123,56 @@ module Whatsapp::IncomingMessageServiceHelpers
   end
 
   def message_under_process?
-    key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: @processed_params[:messages].first[:id])
+    message_id = if evolution_api?
+                   # Evolution API structure: data.key.id
+                   @processed_params[:data]&.dig(:key, :id)
+                 else
+                   # Baileys structure: messages.first.id
+                   @processed_params[:messages]&.first&.dig(:id)
+                 end
+
+    return false unless message_id
+
+    key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: message_id)
     Redis::Alfred.get(key)
   end
 
   def cache_message_source_id_in_redis
-    return if @processed_params.try(:[], :messages).blank?
+    message_id = if evolution_api?
+                   # Evolution API structure: data.key.id
+                   @processed_params[:data]&.dig(:key, :id)
+                 else
+                   # Baileys structure: messages.first.id
+                   return if @processed_params.try(:[], :messages).blank?
 
-    key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: @processed_params[:messages].first[:id])
+                   @processed_params[:messages].first[:id]
+                 end
+
+    return unless message_id
+
+    key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: message_id)
     ::Redis::Alfred.setex(key, true)
   end
 
   def clear_message_source_id_from_redis
-    key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: @processed_params[:messages].first[:id])
+    message_id = if evolution_api?
+                   # Evolution API structure: data.key.id
+                   @processed_params[:data]&.dig(:key, :id)
+                 else
+                   # Baileys structure: messages.first.id
+                   @processed_params[:messages].first[:id]
+                 end
+
+    return unless message_id
+
+    key = format(Redis::RedisKeys::MESSAGE_SOURCE_KEY, id: message_id)
     ::Redis::Alfred.delete(key)
+  end
+
+  private
+
+  def evolution_api?
+    # Evolution API has data structure with event field, while Baileys has messages array
+    @processed_params[:data].present? && @processed_params[:event].present?
   end
 end

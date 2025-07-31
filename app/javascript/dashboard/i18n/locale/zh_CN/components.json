@@ -45,12 +45,9 @@
     "WATCH_VIDEO": "观看视频"
   },
   "DURATION_INPUT": {
-    "MINUTES": "分钟",
-    "HOURS": "小时",
-    "DAYS": "天",
-    "PLACEHOLDER": "输入耗时"
-  },
-  "CHANNEL_SELECTOR": {
-    "COMING_SOON": "Coming Soon!"
+    "MINUTES": "Minutes",
+    "HOURS": "Hours",
+    "DAYS": "Days",
+    "PLACEHOLDER": "Enter duration"
   }
 }

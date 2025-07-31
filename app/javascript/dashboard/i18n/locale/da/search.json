@@ -4,14 +4,12 @@
       "ALL": "Alle",
       "CONTACTS": "Kontakter",
       "CONVERSATIONS": "Samtaler",
-      "MESSAGES": "Beskeder",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Beskeder"
     },
     "SECTION": {
       "CONTACTS": "Kontakter",
       "CONVERSATIONS": "Samtaler",
-      "MESSAGES": "Beskeder",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Beskeder"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

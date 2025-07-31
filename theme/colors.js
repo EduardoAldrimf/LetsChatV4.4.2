@@ -15,18 +15,19 @@ const {
 
 export const colors = {
   woot: {
-    25: blue.blue2,
-    50: blue.blue3,
-    75: blue.blue4,
-    100: blue.blue5,
-    200: blue.blue7,
-    300: blue.blue8,
-    400: blueDark.blue11,
-    500: blueDark.blue10,
-    600: blueDark.blue9,
-    700: blueDark.blue8,
-    800: blueDark.blue6,
-    900: blueDark.blue2,
+    25:  "#ffffff",
+    50:  "#dbf0f0",
+    75:  "#b8e0e2",
+    100: "#94d0d3",
+    200: "#70c1c4",
+    300: "#4cb2b5",
+    400: "#37a9ad",
+    500: "#29a2a7",
+    600: "#238c90",
+    700: "#1d767a",
+    800: "#175f63",
+    850: "#12494d",
+    900: "#0c3236"
   },
   green: {
     50: greenDark.green12,
@@ -39,6 +40,9 @@ export const colors = {
     700: green.green11,
     800: greenDark.green7,
     900: greenDark.green6,
+  },
+  blue: {
+    500: blue.blue9,
   },
   yellow: {
     50: yellow.yellow2,
@@ -63,8 +67,11 @@ export const colors = {
     500: slateDark.slate10,
     600: slate.slate11,
     700: slateDark.slate8,
-    800: slateDark.slate4,
-    900: slateDark.slate1,
+    // 800: slateDark.slate4,
+    800: "#2b3942", //"#1f2c34", //"#161c32",
+    850: "#0a1014", //"#161c32",
+    // 900: slateDark.slate1,
+    900: "#121b22" //"#111828",
   },
   black: {
     50: slate.slate2,
@@ -210,8 +217,8 @@ export const colors = {
       12: 'rgb(var(--gray-12) / <alpha-value>)',
     },
 
-    black: '#000000',
-    brand: '#2781F6',
+    black: '#0a1014',
+    brand: '#29a2a7',
     background: 'rgb(var(--background-color) / <alpha-value>)',
     solid: {
       1: 'rgb(var(--solid-1) / <alpha-value>)',

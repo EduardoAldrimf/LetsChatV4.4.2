@@ -224,7 +224,9 @@
           "LABEL": "Provedor de API",
           "TWILIO": "Twilio",
           "WHATSAPP_CLOUD": "Cloud do WhatsApp",
-          "360_DIALOG": "360Dialog"
+          "360_DIALOG": "360Dialog",
+          "EVOLUTION": "Evolution",
+          "EVOLUTION_DESC": "Conecte via Evolution API"
         },
         "INBOX_NAME": {
           "LABEL": "Nome da Caixa de Entrada",
@@ -268,44 +270,76 @@
           "ERROR_MESSAGE": "Não foi possível salvar o canal do WhatsApp"
         }
       },
-      "VOICE": {
-        "TITLE": "Voice Channel",
-        "DESC": "Integrate Twilio Voice and start supporting your customers via phone calls.",
-        "PHONE_NUMBER": {
-          "LABEL": "Número de Telefone",
-          "PLACEHOLDER": "Enter your phone number (e.g. +1234567890)",
-          "ERROR": "Please provide a valid phone number in E.164 format (e.g. +1234567890)"
+      "EVOLUTION": {
+        "TITLE": "Integração Evolution",
+        "DESC": "Gerencie sua conexão Evolution WhatsApp.",
+        "INSTANCE_NAME": "Nome da instância (usa o nome da caixa)",
+        "INSTANCE_NAME_ERROR": "O nome da instância é obrigatório",
+        "MANAGEMENT": {
+          "TITLE": "Gerenciamento da instância",
+          "SUBTITLE": "Controle o status da conexão"
         },
-        "TWILIO": {
-          "ACCOUNT_SID": {
-            "LABEL": "SID da Conta",
-            "PLACEHOLDER": "Enter your Twilio Account SID",
-            "REQUIRED": "Account SID is required"
-          },
-          "AUTH_TOKEN": {
-            "LABEL": "Token de autenticação",
-            "PLACEHOLDER": "Enter your Twilio Auth Token",
-            "REQUIRED": "Auth Token is required"
-          },
-          "API_KEY_SID": {
-            "LABEL": "Chave da API SID",
-            "PLACEHOLDER": "Enter your Twilio API Key SID",
-            "REQUIRED": "API Key SID is required"
-          },
-          "API_KEY_SECRET": {
-            "LABEL": "Segredo da Chave API",
-            "PLACEHOLDER": "Enter your Twilio API Key Secret",
-            "REQUIRED": "API Key Secret is required"
-          },
-          "TWIML_APP_SID": {
-            "LABEL": "TwiML App SID",
-            "PLACEHOLDER": "Enter your Twilio TwiML App SID (starts with AP)",
-            "REQUIRED": "TwiML App SID is required"
-          }
+        "STATUS": {
+          "LABEL": "Status:",
+          "REFRESH": "Atualizar",
+          "REFRESHED": "Status atualizado"
         },
-        "SUBMIT_BUTTON": "Create Voice Channel",
-        "API": {
-          "ERROR_MESSAGE": "We were not able to create the voice channel"
+        "QR_CODE": {
+          "TITLE": "Código QR",
+          "INSTRUCTIONS": "Escaneie este código com o WhatsApp para conectar.",
+          "GENERATE": "Gerar código QR",
+          "SUCCESS": "Código QR gerado",
+          "NO_QR": "Código QR indisponível",
+          "ERROR": "Falha ao gerar o código QR"
+        },
+        "DISCONNECT": {
+          "BUTTON": "Desconectar",
+          "SUCCESS": "Instância desconectada",
+          "ERROR": "Falha ao desconectar a instância"
+        },
+        "PROXY": {
+          "TITLE": "Configurações de proxy",
+          "SUBTITLE": "Configure o proxy para a Evolution API",
+          "ENABLE": "Habilitar proxy",
+          "HOST": "Host",
+          "HOST_PLACEHOLDER": "Host do proxy",
+          "PORT": "Porta",
+          "PORT_PLACEHOLDER": "Porta do proxy",
+          "USERNAME": "Usuário",
+          "USERNAME_PLACEHOLDER": "Usuário do proxy",
+          "PASSWORD": "Senha",
+          "PASSWORD_PLACEHOLDER": "Senha do proxy",
+          "UPDATE": "Atualizar proxy",
+          "SUCCESS": "Proxy atualizado",
+          "ERROR": "Não foi possível atualizar o proxy",
+          "VALIDATION_ERROR": "Configuração de proxy inválida"
+        },
+        "SETTINGS": {
+          "TITLE": "Configurações avançadas",
+          "SUBTITLE": "Controle o comportamento do Evolution",
+          "CALLS": {
+            "TITLE": "Chamadas",
+            "REJECT": "Rejeitar chamadas",
+            "MESSAGE": "Mensagem de rejeição",
+            "MESSAGE_PLACEHOLDER": "Não aceito chamadas"
+          },
+          "GROUPS": {
+            "TITLE": "Grupos",
+            "IGNORE": "Ignorar mensagens de grupos"
+          },
+          "STATUS": {
+            "TITLE": "Status",
+            "ALWAYS_ONLINE": "Sempre online"
+          },
+          "MESSAGES": {
+            "TITLE": "Mensagens",
+            "READ": "Marcar como lida",
+            "READ_STATUS": "Enviar status de leitura",
+            "SYNC_HISTORY": "Sincronizar histórico completo"
+          },
+          "UPDATE": "Atualizar configurações",
+          "SUCCESS": "Configurações atualizadas",
+          "ERROR": "Não foi possível atualizar as configurações"
         }
       },
       "API_CHANNEL": {
@@ -515,7 +549,7 @@
     },
     "TABS": {
       "SETTINGS": "Configurações",
-      "COLLABORATORS": "Agentes",
+      "COLLABORATORS": "Colaboradores",
       "CONFIGURATION": "Configuração",
       "CAMPAIGN": "Campanhas",
       "PRE_CHAT_FORM": "Formulário Chat Pré",
@@ -829,8 +863,7 @@
       "TELEGRAM": "Telegram",
       "LINE": "Line",
       "API": "Canal da API",
-      "INSTAGRAM": "Instagram",
-      "VOICE": "Voice"
+      "INSTAGRAM": "Instagram"
     }
   }
 }

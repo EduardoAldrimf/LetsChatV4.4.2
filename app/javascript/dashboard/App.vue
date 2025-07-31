@@ -10,6 +10,7 @@ import vueActionCable from './helper/actionCable';
 import { useRouter } from 'vue-router';
 import { useStore } from 'dashboard/composables/store';
 import WootSnackbarBox from './components/SnackbarContainer.vue';
+import Webphone from './components/widgets/webphone/Webphone.vue';
 import { setColorTheme } from './helper/themeHelper';
 import { isOnOnboardingView } from 'v3/helpers/RouteHelper';
 import { useAccount } from 'dashboard/composables/useAccount';
@@ -31,6 +32,7 @@ export default {
     PaymentPendingBanner,
     WootSnackbarBox,
     PendingEmailVerificationBanner,
+    Webphone,
   },
   setup() {
     const router = useRouter();
@@ -153,6 +155,7 @@ export default {
     <AddAccountModal :show="showAddAccountModal" :has-accounts="hasAccounts" />
     <WootSnackbarBox />
     <NetworkNotification />
+    <Webphone />
   </div>
   <LoadingState v-else />
 </template>

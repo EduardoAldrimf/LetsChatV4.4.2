@@ -21,7 +21,7 @@ watch(
 </script>
 
 <template>
-  <div class="border rounded-lg border-n-slate-4">
+  <div class="border rounded-lg border-n-slate-4 bg-n-solid-2">
     <button
       class="flex items-center justify-between w-full p-4 text-left"
       @click="toggleAccordion"

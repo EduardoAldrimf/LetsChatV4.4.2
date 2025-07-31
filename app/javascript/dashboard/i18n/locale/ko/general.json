@@ -4,7 +4,6 @@
     "PHONE_INPUT": {
       "PLACEHOLDER": "검색",
       "EMPTY_STATE": "검색 결과가 없습니다"
-    },
-    "CLOSE": "닫기"
+    }
   }
 }

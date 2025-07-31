@@ -4,14 +4,12 @@
       "ALL": "Alla",
       "CONTACTS": "Kontakter",
       "CONVERSATIONS": "Konversationer",
-      "MESSAGES": "Meddelanden",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Meddelanden"
     },
     "SECTION": {
       "CONTACTS": "Kontakter",
       "CONVERSATIONS": "Konversationer",
-      "MESSAGES": "Meddelanden",
-      "ARTICLES": "Articles"
+      "MESSAGES": "Meddelanden"
     },
     "VIEW_MORE": "View more",
     "LOAD_MORE": "Load more",

@@ -24,7 +24,7 @@ const handleError = () => {
 
 <template>
   <div
-    class="size-[72px] overflow-hidden contain-content rounded-xl cursor-pointer"
+    class="overflow-hidden contain-content rounded-xl cursor-pointer"
     @click="showGallery = true"
   >
     <div
@@ -36,8 +36,10 @@ const handleError = () => {
     </div>
     <img
       v-else
-      class="object-cover w-full h-full skip-context-menu"
+      class="skip-context-menu max-w-80"
       :src="attachment.dataUrl"
+      :width="attachment.width"
+      :height="attachment.height"
       @error="handleError"
     />
   </div>

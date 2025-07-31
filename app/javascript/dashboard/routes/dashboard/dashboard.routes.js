@@ -18,10 +18,10 @@ export default {
       component: AppContainer,
       children: [
         ...captainRoutes,
+        ...contactRoutes,
         ...inboxRoutes,
         ...conversation.routes,
         ...settings.routes,
-        ...contactRoutes,
         ...searchRoutes,
         ...notificationRoutes,
         ...helpcenterRoutes.routes,

@@ -11,6 +11,7 @@ import AccordionItem from 'dashboard/components/Accordion/AccordionItem.vue';
 import ContactConversations from './ContactConversations.vue';
 import ConversationAction from './ConversationAction.vue';
 import ConversationParticipant from './ConversationParticipant.vue';
+
 import ContactInfo from './contact/ContactInfo.vue';
 import ContactNotes from './contact/ContactNotes.vue';
 import ConversationInfo from './ConversationInfo.vue';
@@ -18,6 +19,7 @@ import CustomAttributes from './customAttributes/CustomAttributes.vue';
 import Draggable from 'vuedraggable';
 import MacrosList from './Macros/List.vue';
 import ShopifyOrdersList from 'dashboard/components/widgets/conversation/ShopifyOrdersList.vue';
+import WooCommerceOrdersList from 'dashboard/components/widgets/conversation/WooCommerceOrdersList.vue';
 import SidebarActionsHeader from 'dashboard/components-next/SidebarActionsHeader.vue';
 import LinearIssuesList from 'dashboard/components/widgets/conversation/linear/IssuesList.vue';
 import LinearSetupCTA from 'dashboard/components/widgets/conversation/linear/LinearSetupCTA.vue';
@@ -57,6 +59,21 @@ const shopifyIntegration = useFunctionGetter(
 
 const isShopifyFeatureEnabled = computed(
   () => shopifyIntegration.value.enabled
+);
+
+const woocommerceIntegration = useFunctionGetter(
+  'integrations/getIntegration',
+  'woocommerce'
+);
+
+const isWoocommerceIntegrationEnabled = computed(
+  () => woocommerceIntegration.value?.enabled || false
+);
+const isWoocommerceFeatureEnabled = computed(() =>
+  isFeatureEnabledonAccount.value(
+    currentAccountId.value,
+    FEATURE_FLAGS.WOOCOMMERCE_INTEGRATION
+  )
 );
 
 const linearIntegration = useFunctionGetter(
@@ -281,6 +298,25 @@ onMounted(() => {
               "
             >
               <ShopifyOrdersList :contact-id="contactId" />
+            </AccordionItem>
+          </div>
+          <div
+            v-else-if="
+              element.name === 'woocommerce_orders' &&
+              isWoocommerceFeatureEnabled &&
+              isWoocommerceIntegrationEnabled
+            "
+          >
+            <AccordionItem
+              :title="$t('CONVERSATION_SIDEBAR.ACCORDION.WOOCOMMERCE_ORDERS')"
+              :is-open="isContactSidebarItemOpen('is_woocommerce_orders_open')"
+              compact
+              @toggle="
+                value =>
+                  toggleSidebarUIState('is_woocommerce_orders_open', value)
+              "
+            >
+              <WooCommerceOrdersList :contact-id="contactId" />
             </AccordionItem>
           </div>
           <div v-else-if="element.name === 'contact_notes'">

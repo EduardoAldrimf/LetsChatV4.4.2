@@ -480,7 +480,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_104358) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "website_token"
-    t.string "widget_color", default: "#1f93ff"
+    t.string "widget_color", default: "#29a2a7"
     t.string "welcome_title"
     t.string "welcome_tagline"
     t.integer "feature_flags", default: 7, null: false
@@ -503,6 +503,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_104358) do
     t.datetime "updated_at", null: false
     t.jsonb "message_templates", default: {}
     t.datetime "message_templates_last_updated", precision: nil
+    t.jsonb "provider_connection", default: {}
     t.index ["phone_number"], name: "index_channel_whatsapp_on_phone_number", unique: true
   end
 
@@ -758,7 +759,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_104358) do
     t.bigint "portal_id"
     t.integer "sender_name_type", default: 0, null: false
     t.string "business_name"
+    t.string "external_token", default: "", null: false
     t.jsonb "csat_config", default: {}, null: false
+    t.boolean "allow_agent_to_delete_message", default: true, null: false
     t.index ["account_id"], name: "index_inboxes_on_account_id"
     t.index ["channel_id", "channel_type"], name: "index_inboxes_on_channel_id_and_channel_type"
     t.index ["portal_id"], name: "index_inboxes_on_portal_id"
@@ -790,7 +793,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_104358) do
   create_table "labels", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "color", default: "#1f93ff", null: false
+    t.string "color", default: "#29a2a7", null: false
     t.boolean "show_on_sidebar"
     t.bigint "account_id"
     t.datetime "created_at", null: false

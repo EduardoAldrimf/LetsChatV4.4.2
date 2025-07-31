@@ -75,6 +75,7 @@
     "json-logic-js": "^2.0.5",
     "lettersanitizer": "^1.0.6",
     "libphonenumber-js": "^1.11.9",
+    "lodash": "4.17.21",
     "markdown-it": "^13.0.2",
     "markdown-it-link-attributes": "^4.0.1",
     "md5": "^2.3.0",
@@ -103,7 +104,8 @@
     "vuedraggable": "^4.1.0",
     "vuex": "~4.1.0",
     "vuex-router-sync": "6.0.0-rc.1",
-    "wavesurfer.js": "7.8.6"
+    "wavesurfer.js": "7.8.6",
+    "wavoip-api": "3.1.24"
   },
   "devDependencies": {
     "@egoist/tailwindcss-icons": "^1.8.1",
@@ -115,8 +117,10 @@
     "@iconify-json/teenyicons": "^1.2.1",
     "@intlify/eslint-plugin-vue-i18n": "^3.2.0",
     "@size-limit/file": "^8.2.4",
+    "@types/vue": "^2.0.0",
     "@vitest/coverage-v8": "3.0.5",
     "@vue/test-utils": "^2.4.6",
+    "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "15.0.0",

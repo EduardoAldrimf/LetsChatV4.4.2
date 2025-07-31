@@ -147,19 +147,7 @@
       "SEND_ATTACHMENT": "Odeslat přílohu",
       "SEND_MESSAGE": "Odeslat zprávu",
       "CHANGE_PRIORITY": "Change Priority",
-      "ADD_SLA": "Add SLA",
-      "OPEN_CONVERSATION": "Open conversation"
-    },
-    "MESSAGE_TYPES": {
-      "INCOMING": "Incoming Message",
-      "OUTGOING": "Outgoing Message"
-    },
-    "PRIORITY_TYPES": {
-      "NONE": "Nic",
-      "LOW": "Low",
-      "MEDIUM": "Medium",
-      "HIGH": "High",
-      "URGENT": "Urgent"
+      "ADD_SLA": "Add SLA"
     },
     "ATTRIBUTES": {
       "MESSAGE_TYPE": "Typ zprávy",

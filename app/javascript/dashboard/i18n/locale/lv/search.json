@@ -4,14 +4,12 @@
       "ALL": "Visi",
       "CONTACTS": "Kontaktpersonas",
       "CONVERSATIONS": "Sarunas",
-      "MESSAGES": "Ziņojumi",
-      "ARTICLES": "Raksti"
+      "MESSAGES": "Ziņojumi"
     },
     "SECTION": {
       "CONTACTS": "Kontaktpersonas",
       "CONVERSATIONS": "Sarunas",
-      "MESSAGES": "Ziņojumi",
-      "ARTICLES": "Raksti"
+      "MESSAGES": "Ziņojumi"
     },
     "VIEW_MORE": "Skatīt vairāk",
     "LOAD_MORE": "Ielādēt vairāk",

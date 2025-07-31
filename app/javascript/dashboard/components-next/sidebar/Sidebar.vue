@@ -8,6 +8,7 @@ import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import { useStorage } from '@vueuse/core';
 import { useSidebarKeyboardShortcuts } from './useSidebarKeyboardShortcuts';
+import { FEATURE_FLAGS } from 'dashboard/featureFlags';
 
 import Button from 'dashboard/components-next/button/Button.vue';
 import SidebarGroup from './SidebarGroup.vue';
@@ -62,6 +63,22 @@ const contactCustomViews = useMapGetter('customViews/getContactCustomViews');
 const conversationCustomViews = useMapGetter(
   'customViews/getConversationCustomViews'
 );
+const currentAccountId = useMapGetter('getCurrentAccountId');
+const isFeatureEnabledonAccount = useMapGetter(
+  'accounts/isFeatureEnabledonAccount'
+);
+
+const hideAllInboxForAgent = computed(() => {
+  // No aplicar restricción si el usuario es administrador
+  const currentUser = store.getters.getCurrentUser;
+  if (currentUser.role === 'administrator') {
+    return false;
+  }
+  return isFeatureEnabledonAccount.value(
+    currentAccountId.value,
+    FEATURE_FLAGS.HIDE_ALL_INBOX_FOR_AGENT
+  );
+});
 
 onMounted(() => {
   store.dispatch('labels/get');
@@ -106,8 +123,12 @@ const newReportRoutes = () => [
 const reportRoutes = computed(() => newReportRoutes());
 
 const menuItems = computed(() => {
-  return [
-    {
+  const inboxViewEnabled = isFeatureEnabledonAccount.value(
+    currentAccountId.value,
+    FEATURE_FLAGS.INBOX_VIEW
+  );
+  const items = [
+    inboxViewEnabled && {
       name: 'Inbox',
       label: t('SIDEBAR.INBOX'),
       icon: 'i-lucide-inbox',
@@ -162,7 +183,8 @@ const menuItems = computed(() => {
             to: accountScopedRoute('team_conversations', { teamId: team.id }),
           })),
         },
-        {
+        // Solo mostrar la sección de Channels si el feature flag no está habilitado
+        !hideAllInboxForAgent.value && {
           name: 'Channels',
           label: t('SIDEBAR.CHANNELS'),
           icon: 'i-lucide-mailbox',
@@ -483,12 +505,15 @@ const menuItems = computed(() => {
       ],
     },
   ];
+
+  // Filtrar los elementos null del array
+  return items.filter(Boolean);
 });
 </script>
 
 <template>
   <aside
-    class="w-[200px] bg-n-solid-2 rtl:border-l ltr:border-r border-n-weak h-screen flex flex-col text-sm pb-1"
+    class="w-[235px] bg-n-solid-1 rtl:border-l ltr:border-r border-n-weak h-screen flex flex-col text-sm pb-1"
   >
     <section class="grid gap-2 mt-2 mb-4">
       <div class="flex items-center min-w-0 gap-2 px-2">

@@ -180,10 +180,12 @@ es:
         issue_created: 'Linear issue %{issue_id} was created by %{user_name}'
         issue_linked: 'Linear issue %{issue_id} was linked by %{user_name}'
         issue_unlinked: 'Linear issue %{issue_id} was unlinked by %{user_name}'
+      woocommerce:
+        order_updated: 'El estado del pedido %{order_id} se actualizó a %{status}'
       csat:
         not_sent_due_to_messaging_window: 'CSAT survey not sent due to outgoing message restrictions'
       auto_resolve:
-        not_sent_due_to_messaging_window: 'Auto-resolve message not sent due to outgoing message restrictions'
+        not_sent_due_to_messaging_window: 'Mensaje de auto-resolución no enviado debido a restricciones de mensajes salientes'
       muted: '%{user_name} ha silenciado la conversación'
       unmuted: '%{user_name} ha anulado el silenciado de la conversación'
       auto_resolution_message: 'Resolviendo la conversación, ya que ha estado inactiva durante un tiempo. Por favor, inicia una nueva conversación si necesitas más ayuda.'
@@ -205,6 +207,8 @@ es:
           reply_with_inbox_name: '%{inbox_name} <%{from_email}>'
       email_subject: 'Nuevos mensajes en esta conversación'
       transcript_subject: 'Transcripción de la conversación'
+    history:
+      separator: 'Conversación #%{id} — %{date}'
     survey:
       response: 'Por favor califica esta conversación, %{link}'
   contacts:
@@ -245,18 +249,22 @@ es:
       description: 'Crea problemas en Linear directamente desde tu ventana de conversación. Alternativamente, enlaza problemas existentes en Linear para un proceso de seguimiento de problemas más eficiente y ágil.'
     notion:
       name: 'Notion'
-      short_description: 'Integrate databases, documents and pages directly with Captain.'
-      description: 'Connect your Notion workspace to enable Captain to access and generate intelligent responses using content from your databases, documents, and pages to provide more contextual customer support.'
+      short_description: 'Integra bases de datos, documentos y páginas directamente con Captain.'
+      description: 'Conecta tu espacio de trabajo de Notion para que Captain pueda acceder y generar respuestas inteligentes usando el contenido de tus bases de datos, documentos y páginas para proporcionar un soporte al cliente más contextual.'
     shopify:
       name: 'Shopify'
       short_description: 'Access order details and customer data from your Shopify store.'
       description: 'Connect your Shopify store to access order details, customer information, and product data directly within your conversations and helps your support team provide faster, more contextual assistance to your customers.'
+    woocommerce:
+      name: 'WooCommerce'
+      short_description: 'Ver pedidos recientes de tu tienda WooCommerce.'
+      description: 'Conecta tu tienda WooCommerce proporcionando la URL de la tienda y las credenciales de la API. Una vez conectada, podrás ver rápidamente los pedidos recientes relacionados con un contacto desde la barra lateral de la conversación.'
     leadsquared:
       name: 'LeadSquared'
       short_description: 'Sync your contacts and conversations with LeadSquared CRM.'
       description: 'Sync your contacts and conversations with LeadSquared CRM. This integration automatically creates leads in LeadSquared when new contacts are added, and logs conversation activity to provide your sales team with complete context.'
   captain:
-    copilot_message_required: El mensaje es obligatorio
+    copilot_message_required: 'Se requiere un mensaje'
     copilot_error: 'Conecte un asistente a esta bandeja de entrada para utilizar Copilot'
     copilot_limit: 'Te quedaste sin créditos de Copilot. Puedes comprar más créditos desde la sección de facturación.'
     copilot:

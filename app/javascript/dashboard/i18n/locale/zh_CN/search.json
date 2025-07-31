@@ -4,14 +4,12 @@
       "ALL": "全部",
       "CONTACTS": "联系人",
       "CONVERSATIONS": "会话",
-      "MESSAGES": "消息",
-      "ARTICLES": "文章"
+      "MESSAGES": "消息"
     },
     "SECTION": {
       "CONTACTS": "联系人",
       "CONVERSATIONS": "会话",
-      "MESSAGES": "消息",
-      "ARTICLES": "文章"
+      "MESSAGES": "消息"
     },
     "VIEW_MORE": "查看更多",
     "LOAD_MORE": "加载更多",
